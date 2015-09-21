@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">RealRunner</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_facebook">Facebook</string>
+    <string name="title_activity_google">Google</string>
+    <string name="title_activity_forgot_password">ForgotPassword</string>
+    <string name="title_activity_welcome">Welcome</string>
+    <string name="title_activity_splash">Splash</string>
+    <string name="title_activity_change_profile">ChangeProfile</string>
+</resources>
