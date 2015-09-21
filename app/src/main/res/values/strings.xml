@@ -11,4 +11,6 @@
     <string name="title_activity_welcome">Welcome</string>
     <string name="title_activity_splash">Splash</string>
     <string name="title_activity_change_profile">ChangeProfile</string>
+    <string name="action_start">Start</string>
+    <string name="action_stop">Stop</string>
 </resources>
