@@ -3,13 +3,14 @@ package com.example.acerth.realrunner;
 import android.app.LocalActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 
-public class MainMenuActivity extends ActionBarActivity {
+public class MainMenuActivity extends AppCompatActivity {
 
     private LinearLayout lProfile;
     LocalActivityManager mLocalActivityManager;
@@ -41,6 +42,11 @@ public class MainMenuActivity extends ActionBarActivity {
         tabHost.addTab(tabSpec2);
         tabHost.addTab(tabSpec3);
         tabHost.addTab(tabSpec4);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("mainmenujaaaaaaaaaaaa", "onactivity called");
     }
 
     @Override
