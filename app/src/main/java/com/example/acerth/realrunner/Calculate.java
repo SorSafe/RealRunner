@@ -27,10 +27,21 @@ public class Calculate extends Activity {
     private ArrayList<String> daysExerciseData = new ArrayList<String>();
 
     private ImageView calButton;
+    private ImageView resetButton;
     private String bmiStr;
     private String bmrStr;
     private String tdeeStr;
     private double mutiply;
+    private String genderChosen;
+
+    EditText wieghtValue;
+    EditText hieghtValue;
+    EditText ageValue;
+
+    TextView bmiValue;
+    TextView statusValue;
+    TextView bmrValue;
+    TextView tdeeValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +51,71 @@ public class Calculate extends Activity {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
 //        linearLayout.setBackgroundColor(Color.parseColor("#00b06b"));
 
+        wieghtValue = (EditText) findViewById(R.id.weight);
+        hieghtValue = (EditText) findViewById(R.id.hieght);
+        ageValue = (EditText) findViewById(R.id.Age);
+
+        bmiValue = (TextView) findViewById(R.id.bmi);
+        statusValue = (TextView) findViewById(R.id.status);
+        bmrValue = (TextView) findViewById(R.id.bmr);
+        tdeeValue  = (TextView) findViewById(R.id.TDEE);
+
+        // Add gender Data to spinner
+        gender = (Spinner) findViewById(R.id.gender);
+        createGenderData();
+
+        ArrayAdapter<String> adapterGender = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, genderData);
+        gender.setAdapter(adapterGender);
+
+        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String gender_select = genderData.get(position);
+                if (gender_select.equalsIgnoreCase("Male")) {
+                    genderChosen = "Male";
+                } else if (gender_select.equalsIgnoreCase("Female")) {
+                    genderChosen = "Female";
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getApplicationContext(), "Please select day of Gender !!!!!", Toast.LENGTH_SHORT);
+            }
+        });
+
+        // Add days Exercise to spinner
+        daysExerciseSpinner = (Spinner) findViewById(R.id.day_of_exercise_per_week);
+        createdaysExerciseData();
+
+        ArrayAdapter<String> adapterExercise = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, daysExerciseData);
+        daysExerciseSpinner.setAdapter(adapterExercise);
+
+        daysExerciseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selected_day = daysExerciseData.get(position);
+                if (selected_day.equalsIgnoreCase("No Exercise")) {
+                    mutiply = 1.2;
+                } else if (selected_day.equalsIgnoreCase("1-3 days/week")) {
+                    mutiply = 1.375;
+                } else if (selected_day.equalsIgnoreCase("4-5 days/week")) {
+                    mutiply = 1.55;
+                } else if (selected_day.equalsIgnoreCase("6-7 days/week")) {
+                    mutiply = 1.725;
+                } else if (selected_day.equalsIgnoreCase("everyday (for altelete)")) {
+                    mutiply = 1.9;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getApplicationContext(), "Please select day of Exercise !!!!!", Toast.LENGTH_SHORT);
+            }
+        });
+
         calButton = (ImageView) findViewById(R.id.cal);
         calButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +123,20 @@ public class Calculate extends Activity {
                 calculateBMI();
                 calculateBMR();
                 calculateTDEE();
+            }
+        });
+
+        resetButton = (ImageView) findViewById(R.id.reset);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wieghtValue.setText("");
+                hieghtValue.setText("");
+                ageValue.setText("");
+                bmiValue.setText("");
+                statusValue.setText("");
+                bmrValue.setText("");
+                tdeeValue.setText("");
             }
         });
     }
@@ -65,13 +155,7 @@ public class Calculate extends Activity {
     }
 
 
-
     public  void calculateBMI(){
-        EditText wieghtValue = (EditText) findViewById(R.id.weight);
-        EditText hieghtValue = (EditText) findViewById(R.id.hieght);
-        TextView bmiValue = (TextView) findViewById(R.id.bmi);
-        TextView statusValue = (TextView) findViewById(R.id.status);
-
         double wieght = Double.parseDouble(wieghtValue.getText().toString());
         double hieght = Double.parseDouble(hieghtValue.getText().toString());
 
@@ -96,89 +180,25 @@ public class Calculate extends Activity {
     }
 
     public void calculateBMR (){
-        EditText wieghtValue = (EditText) findViewById(R.id.weight);
-        EditText hieghtValue = (EditText) findViewById(R.id.hieght);
-        EditText ageValue = (EditText) findViewById(R.id.Age);
-        TextView bmrValue = (TextView) findViewById(R.id.bmr);
+        double wieght = Double.parseDouble(wieghtValue.getText().toString());
+        double hieght = Double.parseDouble(hieghtValue.getText().toString());
+        double age = Double.parseDouble(ageValue.getText().toString());
 
-        final double wieght = Double.parseDouble(wieghtValue.getText().toString());
-        final double hieght = Double.parseDouble(hieghtValue.getText().toString());
-        final double age = Double.parseDouble(ageValue.getText().toString());
-
-        gender = (Spinner) findViewById(R.id.gender);
-        createGenderData();
-
-        ArrayAdapter<String> adapterGender = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, genderData);
-        gender.setAdapter(adapterGender);
-
-        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selected_day = daysExerciseData.get(position);
-                if (selected_day.equalsIgnoreCase("Male")) {
-                    double w = wieght;
-                    double h = hieght;
-                    double a = age;
-                    double malebmr = 66+(13.7*w)+(5*h)-(6.8*a);
-                    bmrStr = malebmr+"";
-                }
-                else if(selected_day.equalsIgnoreCase("Female")) {
-                    double w = wieght;
-                    double h = hieght;
-                    double a = age;
-                    double femalebmr = 66+(13.7*w)+(5*h)-(6.8*a);
-                    bmrStr = femalebmr+"";
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(),"Please select day of Gender !!!!!",Toast.LENGTH_SHORT);
-            }
-        });
-
+        if(genderChosen != null && genderChosen.equalsIgnoreCase("Male")){
+            double malebmr = 66+(13.7*wieght)+(5*hieght)-(6.8*age);
+            bmrStr = malebmr+"";
+        }else if(genderChosen != null && genderChosen.equalsIgnoreCase("Female")){
+            double femalebmr = 665+(9.6*wieght)+(1.8*hieght)-(4.7*age);
+            bmrStr = femalebmr+"";
+        }
         bmrValue.setText(bmrStr);
     }
 
     public void calculateTDEE(){
-        TextView bmrValue = (TextView) findViewById(R.id.bmr);
-        TextView tdeeValue  = (TextView) findViewById(R.id.TDEE);
-
-        final double bmr = Double.parseDouble(bmrValue.getText().toString());
-
-        daysExerciseSpinner = (Spinner) findViewById(R.id.day_of_exercise_per_week);
-        createdaysExerciseData();
-
-        ArrayAdapter<String> adapterExercise = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, daysExerciseData);
-        daysExerciseSpinner.setAdapter(adapterExercise);
-
-        daysExerciseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selected_day = daysExerciseData.get(position);
-                if (selected_day.equalsIgnoreCase("No Exercise")) {
-                    mutiply = 1.2;
-                } else if (selected_day.equalsIgnoreCase("1-3 days/week")) {
-                    mutiply = 1.375;
-                } else if (selected_day.equalsIgnoreCase("4-5 days/week")) {
-                    mutiply = 1.55;
-                } else if (selected_day.equalsIgnoreCase("6-7 days/week")) {
-                    mutiply = 1.725;
-                } else if (selected_day.equalsIgnoreCase("everyday (for altelete)")) {
-                    mutiply = 1.9;
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(getApplicationContext(),"Please select day of Exercise !!!!!",Toast.LENGTH_SHORT);
-            }
-        });
+        double bmr = Double.parseDouble(bmrValue.getText().toString());
 
         double tdee = bmr*mutiply;
-        String tdeeStr = tdee+"";
+        tdeeStr = tdee+"";
         tdeeValue.setText(tdeeStr);
     }
 }
