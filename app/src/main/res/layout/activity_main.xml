@@ -1,38 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
     android:padding="16dp"
-    android:background="#AEFFFE">
+    android:background="#fbffb1">
 
     <ImageView
         android:id="@+id/regis"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/register"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <ImageView
-        android:id="@+id/fb"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:layout_below="@+id/regis"
-        android:src="@drawable/loginfacebook"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="170dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/register" />
 
     <ImageView
         android:id="@+id/google"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
-        android:layout_below="@+id/fb"
         android:src="@drawable/logingoogle"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/regis" />
 
 
     <ImageView
@@ -41,7 +30,6 @@
         android:layout_height="32dp"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/google"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/haveaacount" />
 

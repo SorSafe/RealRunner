@@ -13,7 +13,6 @@ public class MainActivity extends Activity {
 
 
     private ImageView mImageViewReg;
-    private ImageView mImageViewFb;
     private ImageView mImageViewGoo;
     private ImageView mImageAcc;
 
@@ -33,12 +32,6 @@ public class MainActivity extends Activity {
                 startActivity(new Intent(getApplicationContext(), Register.class));
             }
         });
-        mImageViewFb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Facebook.class));
-            }
-        });
         mImageViewGoo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,9 +47,7 @@ public class MainActivity extends Activity {
     }
 
     private void bindWidget() {
-        mImageViewReg = (ImageView)findViewById(R.id.regis);
-        mImageViewFb = (ImageView)findViewById(R.id.fb);
-        mImageViewGoo = (ImageView)findViewById(R.id.google);
+        mImageViewReg = (ImageView)findViewById(R.id.regis);        mImageViewGoo = (ImageView)findViewById(R.id.google);
         mImageAcc = (ImageView)findViewById(R.id.acc);
         
     }
