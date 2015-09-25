@@ -8,11 +8,17 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.acerth.helper.SQLiteHandler;
+import com.example.acerth.helper.SessionManager;
+
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Created by Admin PC on 8/9/2558.
@@ -25,6 +31,12 @@ public class Tab_Profile extends AppCompatActivity {
     private ImageView mImageViewProfile;
     private int SELECT_IMAGE = 2;
 
+    private SQLiteHandler db;
+
+    private TextView nameField;
+    private EditText caloriesField;
+    private EditText distanceField;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +46,27 @@ public class Tab_Profile extends AppCompatActivity {
 
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
 //        linearLayout.setBackgroundColor(Color.parseColor("#f62355"));
+
+        nameField = (TextView) findViewById(R.id.name);
+        caloriesField = (EditText) findViewById(R.id.cal);
+        distanceField = (EditText) findViewById(R.id.dis);
+
+        // SqLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
+        HashMap<String, String> user = db.getUserDetails();
+
+        String user_game_name = user.get("user_game_name");
+        double calories = Double.parseDouble(user.get("calories"));
+        double distance = Double.parseDouble(user.get("distance"));
+
+        String calStr = calories+"";
+        String disStr = distance+"";
+
+        // Displaying the user details on the screen
+        nameField.setText(user_game_name);
+        caloriesField.setText(calStr);
+        distanceField.setText(disStr);
     }
 
     private void setWidgetEventListener() {
