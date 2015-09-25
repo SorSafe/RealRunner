@@ -8,11 +8,17 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.acerth.helper.SQLiteHandler;
+import com.example.acerth.helper.SessionManager;
+
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Created by Admin PC on 8/9/2558.
@@ -25,40 +31,63 @@ public class Tab_Profile extends AppCompatActivity {
     private ImageView mImageViewProfile;
     private int SELECT_IMAGE = 2;
 
+    private SQLiteHandler db;
+
+    private TextView nameField;
+    private EditText caloriesField;
+    private EditText distanceField;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_profile);
-
+        bindWidget();
+        setWidgetEventListener();
 
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
 //        linearLayout.setBackgroundColor(Color.parseColor("#f62355"));
 
-        mImageViewAddFriend = (ImageView) findViewById(R.id.add_friend);
+        nameField = (TextView) findViewById(R.id.name);
+        caloriesField = (EditText) findViewById(R.id.cal);
+        distanceField = (EditText) findViewById(R.id.dis);
+
+        // SqLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
+        HashMap<String, String> user = db.getUserDetails();
+
+        String user_game_name = user.get("user_game_name");
+        double calories = Double.parseDouble(user.get("calories"));
+        double distance = Double.parseDouble(user.get("distance"));
+
+        String calStr = calories+"";
+        String disStr = distance+"";
+
+        // Displaying the user details on the screen
+        nameField.setText(user_game_name);
+        caloriesField.setText(calStr);
+        distanceField.setText(disStr);
+    }
+
+    private void setWidgetEventListener() {
         mImageViewAddFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Add_Friends.class));
             }
         });
-
-        mImageViewCalculate = (ImageView) findViewById(R.id.calculate);
         mImageViewCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Calculate.class));
             }
         });
-
-        mImageViewSetting = (ImageView) findViewById(R.id.setting);
         mImageViewSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Setting.class));
             }
         });
-
-        mImageViewProfile = (ImageView) findViewById(R.id.pic_profile);
         mImageViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,12 +97,12 @@ public class Tab_Profile extends AppCompatActivity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 //                        Toast.makeText(getApplicationContext(),
-//                                "ขอบคุณครับ", Toast.LENGTH_SHORT).show();
+//                                "เธเธญเธเธเธธเธ“เธเธฃเธฑเธ", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent();
                         intent.setType("image/*");
                         intent.setAction(Intent.ACTION_GET_CONTENT);//
-                        getParent().startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
+                        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
 
                     }
                 });
@@ -86,10 +115,11 @@ public class Tab_Profile extends AppCompatActivity {
                 builder.show();
             }
         });
+
     }
 
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SELECT_IMAGE) {
             if (resultCode == this.RESULT_OK) {
@@ -107,4 +137,13 @@ public class Tab_Profile extends AppCompatActivity {
             }
         }
     }
+
+
+    private void bindWidget() {
+        mImageViewAddFriend = (ImageView) findViewById(R.id.add_friend);
+        mImageViewCalculate = (ImageView) findViewById(R.id.calculate);
+        mImageViewSetting = (ImageView) findViewById(R.id.setting);
+        mImageViewProfile = (ImageView) findViewById(R.id.pic_profile);
+    }
+
 }
