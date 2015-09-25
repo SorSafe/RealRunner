@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,13 +29,14 @@ public class Tab_Profile extends AppCompatActivity {
     private ImageView mImageViewCalculate;
     private ImageView mImageViewSetting;
     private ImageView mImageViewProfile;
+    private ImageView mImageViewEditName;
     private int SELECT_IMAGE = 2;
 
     private SQLiteHandler db;
 
     private TextView nameField;
-    private EditText caloriesField;
-    private EditText distanceField;
+    private TextView caloriesField;
+    private TextView distanceField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,8 @@ public class Tab_Profile extends AppCompatActivity {
 //        linearLayout.setBackgroundColor(Color.parseColor("#f62355"));
 
         nameField = (TextView) findViewById(R.id.name);
-        caloriesField = (EditText) findViewById(R.id.cal);
-        distanceField = (EditText) findViewById(R.id.dis);
+        caloriesField = (TextView) findViewById(R.id.cal);
+        distanceField = (TextView) findViewById(R.id.dis);
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -56,8 +58,8 @@ public class Tab_Profile extends AppCompatActivity {
         HashMap<String, String> user = db.getUserDetails();
 
         String user_game_name = user.get("user_game_name");
-        double calories = Double.parseDouble(user.get("calories"));
-        double distance = Double.parseDouble(user.get("distance"));
+        String calories = user.get("calories");
+        String distance = user.get("distance");
 
         String calStr = calories+"";
         String disStr = distance+"";
@@ -65,8 +67,8 @@ public class Tab_Profile extends AppCompatActivity {
 
         // Displaying the user details on the screen
         nameField.setText(user_game_name);
-        caloriesField.setText(calStr);
-        distanceField.setText(disStr);
+        caloriesField.setText(calories);
+        distanceField.setText(distance);
     }
 
     private void setWidgetEventListener() {
@@ -97,7 +99,7 @@ public class Tab_Profile extends AppCompatActivity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 //                        Toast.makeText(getApplicationContext(),
-//                                "เธเธญเธเธเธธเธ“เธเธฃเธฑเธ", Toast.LENGTH_SHORT).show();
+//                                "hello", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent();
                         intent.setType("image/*");
@@ -111,6 +113,43 @@ public class Tab_Profile extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
+                builder.show();
+            }
+        });
+        mImageViewEditName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(Tab_Profile.this);
+                LayoutInflater inflater = getLayoutInflater();
+
+                view = inflater.inflate(R.layout.activity_edit_name, null);
+                builder.setView(view);
+
+                final TextView old_name = (TextView) view.findViewById(R.id.old_name);
+                final EditText new_name = (EditText) view.findViewById(R.id.new_name);
+
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Check username password
+                        if (old_name.getText().equals("demo@example.com") &&
+                                new_name.getText().equals("demo")) {
+                            Toast.makeText(getApplicationContext(), "Edit Failed",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Edit success!!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
                 builder.show();
             }
         });
@@ -143,6 +182,7 @@ public class Tab_Profile extends AppCompatActivity {
         mImageViewCalculate = (ImageView) findViewById(R.id.calculate);
         mImageViewSetting = (ImageView) findViewById(R.id.setting);
         mImageViewProfile = (ImageView) findViewById(R.id.pic_profile);
+        mImageViewEditName = (ImageView) findViewById(R.id.edit_name);
     }
 
 }

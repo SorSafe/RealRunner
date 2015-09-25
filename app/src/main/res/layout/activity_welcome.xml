@@ -21,7 +21,7 @@
 
         <TextView
             android:id="@+id/nameWel"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textColor="@color/lbl_name"
@@ -30,7 +30,7 @@
 
         <TextView
             android:id="@+id/emailWel"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="13dp"
             android:textAlignment="center"
