@@ -61,6 +61,7 @@ public class Tab_Profile extends AppCompatActivity {
 
         String calStr = calories+"";
         String disStr = distance+"";
+        String text = "";
 
         // Displaying the user details on the screen
         nameField.setText(user_game_name);
