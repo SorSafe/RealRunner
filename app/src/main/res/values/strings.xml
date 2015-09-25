@@ -13,4 +13,7 @@
     <string name="title_activity_change_profile">ChangeProfile</string>
     <string name="action_start">Start</string>
     <string name="action_stop">Stop</string>
+    <string name="welcome">Welcome</string>
+    <string name="btn_main_menu">MAIN MENU</string>
+    <string name="btn_logout">LOGOUT</string>
 </resources>
