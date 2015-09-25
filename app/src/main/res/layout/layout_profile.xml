@@ -3,6 +3,7 @@
     android:id="@+id/linear"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -20,7 +21,7 @@
             android:id="@+id/pic_profile"
             android:layout_width="180dp"
             android:layout_height="150dp"
-            android:src="@drawable/profile" />
+            android:src="@drawable/user_default" />
 
     </LinearLayout>
 
@@ -29,7 +30,7 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/name"
@@ -79,7 +80,9 @@
             android:layout_width="150px"
             android:layout_height="50px"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp" />
+            android:layout_marginLeft="20dp"
+            android:autoText="false"
+            android:singleLine="false" />
 
 
         <TextView

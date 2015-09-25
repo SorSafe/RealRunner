@@ -29,32 +29,36 @@ public class Tab_Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_profile);
-        bindWidget();
-        setWidgetEventListener();
+
 
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
 //        linearLayout.setBackgroundColor(Color.parseColor("#f62355"));
-    }
 
-    private void setWidgetEventListener() {
+        mImageViewAddFriend = (ImageView) findViewById(R.id.add_friend);
         mImageViewAddFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Add_Friends.class));
             }
         });
+
+        mImageViewCalculate = (ImageView) findViewById(R.id.calculate);
         mImageViewCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Calculate.class));
             }
         });
+
+        mImageViewSetting = (ImageView) findViewById(R.id.setting);
         mImageViewSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), Setting.class));
             }
         });
+
+        mImageViewProfile = (ImageView) findViewById(R.id.pic_profile);
         mImageViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +73,7 @@ public class Tab_Profile extends AppCompatActivity {
                         Intent intent = new Intent();
                         intent.setType("image/*");
                         intent.setAction(Intent.ACTION_GET_CONTENT);//
-                        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
+                        getParent().startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
 
                     }
                 });
@@ -82,8 +86,8 @@ public class Tab_Profile extends AppCompatActivity {
                 builder.show();
             }
         });
-
     }
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -103,13 +107,4 @@ public class Tab_Profile extends AppCompatActivity {
             }
         }
     }
-
-
-    private void bindWidget() {
-        mImageViewAddFriend = (ImageView) findViewById(R.id.add_friend);
-        mImageViewCalculate = (ImageView) findViewById(R.id.calculate);
-        mImageViewSetting = (ImageView) findViewById(R.id.setting);
-        mImageViewProfile = (ImageView) findViewById(R.id.pic_profile);
-    }
-
 }

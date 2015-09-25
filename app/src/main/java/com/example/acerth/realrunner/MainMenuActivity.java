@@ -2,18 +2,27 @@ package com.example.acerth.realrunner;
 
 import android.app.LocalActivityManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
+import android.widget.Toast;
+
+import java.io.IOException;
 
 public class MainMenuActivity extends AppCompatActivity {
 
     private LinearLayout lProfile;
     LocalActivityManager mLocalActivityManager;
+    //    ImageView mImageView;
+    private int SELECT_IMAGE = 2;
+    TabHost tabHost;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +31,8 @@ public class MainMenuActivity extends AppCompatActivity {
         mLocalActivityManager = new LocalActivityManager(this, false);
         mLocalActivityManager.dispatchCreate(savedInstanceState);
 
-        TabHost tabHost = (TabHost) findViewById(R.id.tabhost);
+
+        tabHost = (TabHost) findViewById(R.id.tabhost);
         tabHost.setup(mLocalActivityManager);
 
         TabHost.TabSpec tabSpec1 = tabHost.newTabSpec("tab1")
@@ -42,25 +52,29 @@ public class MainMenuActivity extends AppCompatActivity {
         tabHost.addTab(tabSpec2);
         tabHost.addTab(tabSpec3);
         tabHost.addTab(tabSpec4);
-    }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d("mainmenujaaaaaaaaaaaa", "onactivity called");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mLocalActivityManager.dispatchPause(!isFinishing());
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mLocalActivityManager.dispatchResume();
-    }
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        Log.d("mainmenujaaaaaaaaaaaa", "onactivity called");
+//    }
+
+
+
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        mLocalActivityManager.dispatchPause(!isFinishing());
+//
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        mLocalActivityManager.dispatchResume();
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -83,4 +97,25 @@ public class MainMenuActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ImageView mImageViewProfile = (ImageView)tabHost.getCurrentView().findViewById(R.id.pic_profile);
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SELECT_IMAGE) {
+            if (resultCode == this.RESULT_OK) {
+                if (data != null) {
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+                        mImageViewProfile.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                } else if (resultCode == this.RESULT_CANCELED) {
+                    Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
 }
+

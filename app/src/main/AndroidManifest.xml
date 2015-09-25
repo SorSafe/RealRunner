@@ -29,9 +29,13 @@
         <activity
             android:name=".MainMenuActivity"
             android:label="@string/app_name" >
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".Tab_Profile" >
+
         </activity>
         <activity android:name=".Tab_Map" />
         <activity android:name=".Tab_Memory_Book" />
@@ -42,10 +46,6 @@
         <activity
             android:name=".MainActivity"
             android:label="Real Runner" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Register"

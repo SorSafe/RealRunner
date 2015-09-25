@@ -47,7 +47,8 @@ public class MainActivity extends Activity {
     }
 
     private void bindWidget() {
-        mImageViewReg = (ImageView)findViewById(R.id.regis);        mImageViewGoo = (ImageView)findViewById(R.id.google);
+        mImageViewReg = (ImageView)findViewById(R.id.regis);
+        mImageViewGoo = (ImageView)findViewById(R.id.google);
         mImageAcc = (ImageView)findViewById(R.id.acc);
         
     }

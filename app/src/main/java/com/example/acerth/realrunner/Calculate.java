@@ -1,12 +1,12 @@
 package com.example.acerth.realrunner;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +33,7 @@ public class Calculate extends Activity {
     private String tdeeStr;
     private double mutiply;
     private String genderChosen;
+    private ImageView mQuestion;
 
     EditText wieghtValue;
     EditText hieghtValue;
@@ -50,6 +51,14 @@ public class Calculate extends Activity {
 
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
 //        linearLayout.setBackgroundColor(Color.parseColor("#00b06b"));
+
+//        tSeeMore.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getApplicationContext()));
+//            }
+//        });
+
 
         wieghtValue = (EditText) findViewById(R.id.weight);
         hieghtValue = (EditText) findViewById(R.id.hieght);
@@ -116,7 +125,7 @@ public class Calculate extends Activity {
             }
         });
 
-        calButton = (ImageView) findViewById(R.id.cal);
+        calButton = (ImageView)findViewById(R.id.cal);
         calButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +135,7 @@ public class Calculate extends Activity {
             }
         });
 
-        resetButton = (ImageView) findViewById(R.id.reset);
+        resetButton = (ImageView)findViewById(R.id.reset);
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +146,25 @@ public class Calculate extends Activity {
                 statusValue.setText("");
                 bmrValue.setText("");
                 tdeeValue.setText("");
+            }
+        });
+
+        mQuestion = (ImageView)findViewById(R.id.question);
+        mQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(Calculate.this);
+                builder.setMessage("BMI คือ ค่าที่บ่งบอกภาวะอ้วนและผอมในผู้ใหญ่ " +
+                        "\n Status คือ สถานะบ่งบอกความอ้วนและผอมในผู้ใหญ่ "+
+                        "\n BMR คือ อัตราการความต้องการเผาผลาญพื้นฐานในชีวิตประจำวัน " +
+                        "\n TDEE คือ พลังงานที่ใช้ทั้งหมดในชีวิตประจำวัน");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
             }
         });
     }
@@ -196,9 +224,9 @@ public class Calculate extends Activity {
 
     public void calculateTDEE(){
         double bmr = Double.parseDouble(bmrValue.getText().toString());
-
         double tdee = bmr*mutiply;
         tdeeStr = tdee+"";
         tdeeValue.setText(tdeeStr);
     }
+
 }
