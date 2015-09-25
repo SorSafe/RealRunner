@@ -181,7 +181,6 @@
         android:layout_marginTop="10dp"
         android:id="@+id/area8"
         android:layout_below="@+id/area7"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal">
 
         <TextView
