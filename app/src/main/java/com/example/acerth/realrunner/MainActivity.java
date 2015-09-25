@@ -9,9 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.acerth.helper.SessionManager;
+
 public class MainActivity extends Activity {
 
-
+    private SessionManager session;
     private ImageView mImageViewReg;
     private ImageView mImageViewGoo;
     private ImageView mImageAcc;
@@ -21,8 +23,20 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bindWidget();
-        setWidgetEventListener();
+
+        session = new SessionManager(getApplicationContext());
+
+        if (session.isLoggedIn()) {
+            // User is already logged in. Take him to main activity
+            Intent intent = new Intent(MainActivity.this, Welcome.class);
+            startActivity(intent);
+            finish();
+        }else{
+            bindWidget();
+            setWidgetEventListener();
+        }
+        //bindWidget();
+        //setWidgetEventListener();
     }
 
     private void setWidgetEventListener() {

@@ -44,7 +44,7 @@
             android:layout_height="50dp"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/username"
+            android:id="@+id/usernameLog"
             android:layout_centerHorizontal="true"
             android:gravity="center_vertical" />
 
@@ -70,7 +70,7 @@
             android:layout_height="50dp"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/pass"
+            android:id="@+id/passLog"
             android:layout_below="@+id/area1"
             android:layout_centerHorizontal="true"/>
     </LinearLayout>
@@ -79,7 +79,7 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:id="@+id/bRegis"
+        android:id="@+id/bLogin"
         android:src="@drawable/login"
         android:layout_below="@+id/area2"
         android:layout_centerHorizontal="true"
@@ -90,9 +90,9 @@
         android:layout_width="150dp"
         android:layout_height="20dp"
         android:id="@+id/forgot"
-        android:layout_below="@id/bRegis"
-        android:layout_marginTop="20dp"
         android:src="@drawable/forgotpassword"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/bLogin"
+        android:layout_alignStart="@+id/bLogin"
+        android:layout_marginTop="59dp" />
 
 </RelativeLayout>
