@@ -2,8 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:id="@+id/linear"
+    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+    </SearchView>
+
+
+
 
     <LinearLayout
         android:orientation="horizontal"
@@ -11,7 +22,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/area2"
         android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:layout_below="@+id/area1">
 
         <ImageView
@@ -36,7 +47,8 @@
         android:id="@+id/area3"
         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/area2">
+        android:layout_below="@+id/area2"
+        android:layout_gravity="center_horizontal">
 
         <ImageView
             android:layout_width="100dp"
@@ -60,7 +72,8 @@
         android:id="@+id/area4"
         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/area3">
+        android:layout_below="@+id/area3"
+        android:layout_gravity="center_horizontal">
 
         <ImageView
             android:layout_width="100dp"
@@ -77,12 +90,5 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Add Friends"
-        android:id="@+id/textView4"
-        android:layout_gravity="center_horizontal" />
-        
+
 </LinearLayout>
