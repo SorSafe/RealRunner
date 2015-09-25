@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.acerth.helper.SQLiteHandler;
-import com.example.acerth.helper.SessionManager;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -102,8 +101,7 @@ public class Tab_Profile extends AppCompatActivity {
                         Intent intent = new Intent();
                         intent.setType("image/*");
                         intent.setAction(Intent.ACTION_GET_CONTENT);//
-                        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
-
+                        getParent().startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
                     }
                 });
                 builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
