@@ -39,11 +39,10 @@
 
         </activity>
         <activity android:name=".Tab_Map" />
-        <activity android:name=".Tab_Memory_Book" />
         <activity android:name=".Tab_Ranking" />
         <activity android:name=".Add_Friends" />
         <activity android:name=".Calculate" />
-        <activity android:name=".Setting" />
+        <activity android:name=".Health_tips" />
         <activity
             android:name=".MainActivity"
             android:label="Real Runner">

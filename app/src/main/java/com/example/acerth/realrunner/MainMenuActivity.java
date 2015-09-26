@@ -41,17 +41,13 @@ public class MainMenuActivity extends AppCompatActivity {
         TabHost.TabSpec tabSpec2 = tabHost.newTabSpec("tab2")
                 .setIndicator("Map")
                 .setContent(new Intent(this, Tab_Map.class));
-        TabHost.TabSpec tabSpec3 = tabHost.newTabSpec("tab3")
-                .setIndicator("Memory Book")
-                .setContent(new Intent(this, Tab_Memory_Book.class));
-        TabHost.TabSpec tabSpec4 = tabHost.newTabSpec("tab4")
+        TabHost.TabSpec tabSpec3 = tabHost.newTabSpec("tab4")
                 .setIndicator("Ranking")
                 .setContent(new Intent(this, Tab_Ranking.class));
 
         tabHost.addTab(tabSpec1);
         tabHost.addTab(tabSpec2);
         tabHost.addTab(tabSpec3);
-        tabHost.addTab(tabSpec4);
 
 
     }
