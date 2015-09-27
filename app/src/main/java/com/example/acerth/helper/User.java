@@ -6,12 +6,12 @@ public class User {
     private int user_id;
     private int user_name;
 
-    private ArrayList<String> genre;
 
     public User() {
     }
 
-    public User(ArrayList<String> genre) {
-        this.genre = genre;
+    public User(int user_id, int user_name) {
+        this.user_id = user_id;
+        this.user_name = user_name;
     }
 }

@@ -40,7 +40,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         private static final String KEY_DISTANCE = "distance";
         private static final String KEY_CALORIES = "calories";
         private static final String KEY_ADMIN_ID = "admin_id";
-
+        private String val;
 
         public SQLiteHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

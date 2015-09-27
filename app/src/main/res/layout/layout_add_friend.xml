@@ -3,25 +3,22 @@
     android:orientation="vertical"
     android:id="@+id/linear"
     android:layout_width="fill_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
-    <EditText
-        android:id="@+id/editText1"
+    <SearchView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:ems="10"
-        android:lines="1"
-        android:hint="search" />
+        android:id="@+id/searchView" />
+
     <ListView
         android:id="@+id/listUser"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="415dp"
         android:divider="@color/list_divider"
         android:dividerHeight="1dp"
-        android:listSelector="@drawable/list_row_selector" />/>
+        android:listSelector="@drawable/list_row_selector"
+        android:layout_weight="1.15" />/>
 
    <!-- <LinearLayout
         android:orientation="horizontal"
