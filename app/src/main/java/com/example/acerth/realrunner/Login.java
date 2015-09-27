@@ -11,8 +11,15 @@ import android.widget.ImageView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.acerth.app.AppConfig;
@@ -122,6 +129,8 @@ public class Login extends Activity {
                         String user_password = user.getString("user_password");
                         String user_email = user.getString("user_email");
                         String user_game_name = user.getString("user_game_name");
+                        String user_image_name = user.getString("user_image_name");
+                        String user_image_path = user.getString("user_image_path");
                         String level = user.getString("level");
                         String league = user.getString("league");
                         double score = user.getDouble("score");
@@ -130,7 +139,9 @@ public class Login extends Activity {
                         String admin_id = user.getString("admin_id");
 
                         // Inserting row in users table
-                        db.addUser(user_id, user_name, user_password, user_email, user_game_name, level, league, score, distance, calories, admin_id);
+                        db.addUser(user_id, user_name, user_password, user_email, user_game_name, user_image_name, user_image_path,
+                                level, league, score, distance, calories, admin_id);
+
 
                         String msg = jObj.getString("msg");
                         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
@@ -155,10 +166,35 @@ public class Login extends Activity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
-                hideDialog();
+                if (error instanceof NoConnectionError) {
+                    Toast.makeText(getApplicationContext(), "NoConnectionError.......", Toast.LENGTH_LONG).show();
+                    hideDialog();
+
+                } else if (error instanceof AuthFailureError) {
+                    Toast.makeText(getApplicationContext(), "AuthFailureError.......", Toast.LENGTH_LONG).show();
+                    hideDialog();
+
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(getApplicationContext(), "ServerError.......", Toast.LENGTH_LONG).show();
+                    hideDialog();
+
+                } else if (error instanceof NetworkError) {
+                    Toast.makeText(getApplicationContext(), "NetworkError.......", Toast.LENGTH_LONG).show();
+                    hideDialog();
+
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(getApplicationContext(), "ParseError.......", Toast.LENGTH_LONG).show();
+                    hideDialog();
+
+                }else if (error instanceof TimeoutError) {
+                    Toast.makeText(getApplicationContext(), "TimeoutError.......", Toast.LENGTH_LONG).show();
+                    hideDialog();
+
+                }
+                //Log.e(TAG, "Login Error: " + error.getMessage());
+                //Toast.makeText(getApplicationContext(),
+                //        error.getMessage(), Toast.LENGTH_LONG).show();
+                //hideDialog();
             }
         }) {
 

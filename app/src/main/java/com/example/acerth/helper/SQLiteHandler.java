@@ -32,6 +32,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         private static final String KEY_PASS = "user_password";
         private static final String KEY_EMAIL = "user_email";
         private static final String KEY_GAME_NAME = "user_game_name";
+        private static final String KEY_IMAGE_NAME = "user_image_name";
+        private static final String KEY_IMAGE_PATH = "user_image_path";
         private static final String KEY_LEVEL = "level";
         private static final String KEY_LEAGUE = "league";
         private static final String KEY_SCORE = "score";
@@ -44,7 +46,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-        // Creating Tables
+        // Creating Tablesh
         @Override
         public void onCreate(SQLiteDatabase db) {
         String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
@@ -53,11 +55,13 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 + KEY_PASS + " TEXT,"
                 + KEY_EMAIL + " TEXT,"
                 + KEY_GAME_NAME + " TEXT,"
+                + KEY_IMAGE_NAME + " TEXT,"
+                + KEY_IMAGE_PATH  + " TEXT,"
                 + KEY_LEVEL + " TEXT,"
                 + KEY_LEAGUE + " TEXT,"
-                + KEY_SCORE + " NUMERIC,"
-                + KEY_DISTANCE + " NUMERIC,"
-                + KEY_CALORIES + " NUMERIC,"
+                + KEY_SCORE + " REAL,"
+                + KEY_DISTANCE + " REAL,"
+                + KEY_CALORIES + " REAL,"
                 + KEY_ADMIN_ID + " TEXT"
                 + ")";
         db.execSQL(CREATE_LOGIN_TABLE);
@@ -79,8 +83,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         /**
          * Storing user details in database
          * */
-    public void addUser(int user_id, String user_name, String user_password ,String user_email, String user_game_name, String level,
-                        String league, double score, double distance, double calories, String admin_id) {
+    public void addUser(int user_id, String user_name, String user_password ,String user_email, String user_game_name, String user_image_name,
+                        String user_image_path, String level, String league, double score, double distance, double calories, String admin_id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -90,6 +94,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_PASS, user_password); // password
         values.put(KEY_EMAIL, user_email); // Email
         values.put(KEY_GAME_NAME, user_game_name); // user_game_name
+        values.put(KEY_IMAGE_NAME, user_image_name); // user_image_name
+        values.put(KEY_IMAGE_PATH, user_image_path); // user_image_path
         values.put(KEY_LEVEL, level); // level
         values.put(KEY_LEAGUE, league); // league
         values.put(KEY_SCORE, score); // score
@@ -104,8 +110,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         Log.d(TAG, "New user inserted into sqlite: " + id);
     }
 
-    public void updateUser(int user_id, String user_name, String user_password , String user_email, String user_game_name, String level,
-                           String league, double score, double distance, double calories, String admin_id) {
+    public void updateUser(int user_id, String user_name, String user_password , String user_email, String user_game_name, String user_image_name,
+                           String user_image_path, String level, String league, double score, double distance, double calories, String admin_id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -113,6 +119,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_PASS, user_password); // password
         values.put(KEY_EMAIL, user_email); // Email
         values.put(KEY_GAME_NAME, user_game_name); // user_game_name
+        values.put(KEY_IMAGE_NAME, user_image_name); // user_image_name
+        values.put(KEY_IMAGE_PATH, user_image_path); // user_image_path
         values.put(KEY_LEVEL, level); // level
         values.put(KEY_LEAGUE, league); // league
         values.put(KEY_SCORE, score); // score
@@ -121,10 +129,10 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_ADMIN_ID, admin_id); // admin_id
 
         // Inserting Row
-        long id = db.update(TABLE_USER, values, KEY_ID + " = " + user_id, null);
+        long id = db.update(TABLE_USER, values, KEY_ID + " = " + user_id, new String[] { String.valueOf(user_game_name) });
         db.close(); // Closing database connection
 
-        Log.d(TAG, "New user inserted into sqlite: " + id);
+        Log.d(TAG, "Old user update into sqlite: " + id);
     }
 
     /**
@@ -139,17 +147,19 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         // Move to first row
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            user.put("user_id", cursor.getString(0));
-            user.put("user_name", cursor.getString(1));
-            user.put("user_password", cursor.getString(2));
-            user.put("user_email", cursor.getString(3));
-            user.put("user_game_name", cursor.getString(4));
-            user.put("level", cursor.getString(5));
-            user.put("league", cursor.getString(6));
-            user.put("score", cursor.getString(7));
-            user.put("distance", cursor.getString(8));
-            user.put("calories", cursor.getString(9));
-            user.put("admin_id", cursor.getString(10));
+            user.put("user_id", cursor.getString(cursor.getColumnIndex(KEY_ID)));
+            user.put("user_name", cursor.getString(cursor.getColumnIndex(KEY_NAME)));
+            user.put("user_password", cursor.getString(cursor.getColumnIndex(KEY_PASS)));
+            user.put("user_email", cursor.getString(cursor.getColumnIndex(KEY_EMAIL)));
+            user.put("user_game_name", cursor.getString(cursor.getColumnIndex(KEY_GAME_NAME)));
+            user.put("user_image_name", cursor.getString(cursor.getColumnIndex(KEY_IMAGE_NAME)));
+            user.put("user_image_path", cursor.getString(cursor.getColumnIndex(KEY_IMAGE_PATH)));
+            user.put("level", cursor.getString(cursor.getColumnIndex(KEY_LEVEL)));
+            user.put("league", cursor.getString(cursor.getColumnIndex(KEY_LEAGUE)));
+            user.put("score", cursor.getString(cursor.getColumnIndex(KEY_SCORE)));
+            user.put("distance", cursor.getString(cursor.getColumnIndex(KEY_DISTANCE)));
+            user.put("calories", cursor.getString(cursor.getColumnIndex(KEY_CALORIES)));
+            user.put("admin_id", cursor.getString(cursor.getColumnIndex(KEY_ADMIN_ID)));
         }
         cursor.close();
         db.close();

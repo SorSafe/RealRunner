@@ -35,8 +35,7 @@
             android:textSize="20sp"
             android:layout_marginLeft="30dp"
             android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:text="Name" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout

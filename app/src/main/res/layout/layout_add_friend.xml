@@ -2,10 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:id="@+id/linear"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:ems="10"
+        android:lines="1"
+        android:hint="search" />
+    <ListView
+        android:id="@+id/listUser"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/list_divider"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_row_selector" />/>
+
+   <!-- <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,6 +101,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Add Friends"
         android:id="@+id/textView4"
-        android:layout_gravity="center_horizontal" />
-        
+        android:layout_gravity="center_horizontal" /> -->
+
 </LinearLayout>
