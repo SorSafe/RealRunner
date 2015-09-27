@@ -121,15 +121,17 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:id="@+id/calculate"
-            android:src="@drawable/calculate" />
+            android:id="@+id/book"
+            android:src="@drawable/book" />
+
 
         <ImageView
             android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:id="@+id/setting"
-            android:src="@drawable/setting" />
+            android:layout_height="40dp"
+            android:id="@+id/calculate"
+            android:src="@drawable/calculate" />
     </LinearLayout>
+
 
 
 </LinearLayout>
