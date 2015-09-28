@@ -4,5 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="user_id">17dp</dimen>
-    <dimen name="user_name">40dip</dimen>
+    <dimen name="user_name">25dip</dimen>
 </resources>

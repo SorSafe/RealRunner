@@ -129,10 +129,22 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_ADMIN_ID, admin_id); // admin_id
 
         // Inserting Row
-        long id = db.update(TABLE_USER, values, KEY_ID + " = " + user_id, new String[] { String.valueOf(user_game_name) });
+        long id = db.update(TABLE_USER, values, KEY_ID + " = " + user_id, new String[]{String.valueOf(user_game_name)});
         db.close(); // Closing database connection
 
         Log.d(TAG, "Old user update into sqlite: " + id);
+    }
+
+    public void updateGamename(int user_id, String oldName, String newName){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_GAME_NAME, newName); // user_game_name
+
+        long id = db.update(TABLE_USER, values, KEY_ID + " = " + user_id, new String[]{String.valueOf(oldName)});
+        db.close(); // Closing database connection
+
+        Log.d(TAG, "New game name of user update into sqlite: " + id);
     }
 
     /**

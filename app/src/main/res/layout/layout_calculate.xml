@@ -211,7 +211,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text=""
-            android:id="@+id/status" />
+            android:id="@+id/status"
+            android:enabled="false"/>
     </LinearLayout>
 
     <LinearLayout
@@ -237,7 +238,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text=""
             android:id="@+id/bmr"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="20dp"
+            android:enabled="false"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -250,7 +252,8 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/TDEE" />
+            android:id="@+id/TDEE"
+            android:enabled="false"/>
     </LinearLayout>
 
     <LinearLayout

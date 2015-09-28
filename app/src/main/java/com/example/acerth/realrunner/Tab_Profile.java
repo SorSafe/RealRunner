@@ -200,22 +200,11 @@ public class Tab_Profile extends AppCompatActivity {
                         JSONObject user = jObj.getJSONObject("user");
 
                         int user_id = user.getInt("user_id");
-                        String user_name = user.getString("user_name");
-                        String user_password = user.getString("user_password");
-                        String user_email = user.getString("user_email");
-                        String user_game_name = user.getString("user_game_name");
-                        String user_image_name = user.getString("user_image_name");
-                        String user_image_path = user.getString("user_image_path");
-                        String level = user.getString("level");
-                        String league = user.getString("league");
-                        double score = user.getDouble("score");
-                        double distance = user.getDouble("distance");
-                        double calories = user.getDouble("calories");
-                        String admin_id = user.getString("admin_id");
+                        String user_old_game_name = user.getString("user_old_game_name");
+                        String user_new_game_name = user.getString("user_new_game_name");
 
                         // Inserting row in users table
-                        db.updateUser(user_id, user_name, user_password, user_email, user_game_name, user_image_name, user_image_path,
-                                level, league, score, distance, calories, admin_id);
+                        db.updateGamename(user_id,user_old_game_name,user_new_game_name);
 
                         String msg = jObj.getString("msg");
                         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
