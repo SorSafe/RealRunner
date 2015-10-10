@@ -2,26 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerInParent="true"
-    android:padding="16dp"
-    android:background="#fbffb1">
+    android:layout_centerInParent="true">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView5"
+        android:src="@drawable/run"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/regis"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="230dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/register" />
-
-    <ImageView
-        android:id="@+id/google"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/logingoogle"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/regis" />
 
 
     <ImageView
@@ -29,7 +25,7 @@
         android:layout_width="150dp"
         android:layout_height="32dp"
         android:layout_marginTop="50dp"
-        android:layout_below="@+id/google"
+        android:layout_below="@+id/regis"
         android:layout_centerHorizontal="true"
         android:src="@drawable/haveaacount" />
 

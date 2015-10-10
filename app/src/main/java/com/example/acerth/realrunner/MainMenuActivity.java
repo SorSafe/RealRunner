@@ -38,16 +38,16 @@ public class MainMenuActivity extends AppCompatActivity {
         TabHost.TabSpec tabSpec1 = tabHost.newTabSpec("tab1")
                 .setIndicator("Profile")
                 .setContent(new Intent(this, Tab_Profile.class));
-        TabHost.TabSpec tabSpec2 = tabHost.newTabSpec("tab2")
-                .setIndicator("Map")
-                .setContent(new Intent(this, Tab_Map.class));
-        TabHost.TabSpec tabSpec3 = tabHost.newTabSpec("tab4")
+//        TabHost.TabSpec tabSpec2 = tabHost.newTabSpec("tab2")
+//                .setIndicator("Map")
+//                .setContent(new Intent(this, Tab_Map.class));
+        TabHost.TabSpec tabSpec2 = tabHost.newTabSpec("tab4")
                 .setIndicator("Ranking")
                 .setContent(new Intent(this, Tab_Ranking.class));
 
         tabHost.addTab(tabSpec1);
         tabHost.addTab(tabSpec2);
-        tabHost.addTab(tabSpec3);
+//        tabHost.addTab(tabSpec3);
 
 
     }

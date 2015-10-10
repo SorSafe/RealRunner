@@ -15,7 +15,6 @@ public class MainActivity extends Activity {
 
     private SessionManager session;
     private ImageView mImageViewReg;
-    private ImageView mImageViewGoo;
     private ImageView mImageAcc;
 
 
@@ -46,12 +45,7 @@ public class MainActivity extends Activity {
                 startActivity(new Intent(getApplicationContext(), Register.class));
             }
         });
-        mImageViewGoo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Google.class));
-            }
-        });
+
         mImageAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +56,6 @@ public class MainActivity extends Activity {
 
     private void bindWidget() {
         mImageViewReg = (ImageView)findViewById(R.id.regis);
-        mImageViewGoo = (ImageView)findViewById(R.id.google);
         mImageAcc = (ImageView)findViewById(R.id.acc);
         
     }

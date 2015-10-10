@@ -112,24 +112,30 @@
 
 
         <ImageView
-            android:layout_width="100dp"
+            android:layout_width="85dp"
             android:layout_height="50dp"
             android:id="@+id/add_friend"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/add_friend" />
 
         <ImageView
-            android:layout_width="100dp"
+            android:layout_width="85dp"
             android:layout_height="50dp"
             android:id="@+id/book"
             android:src="@drawable/book" />
 
 
         <ImageView
-            android:layout_width="100dp"
+            android:layout_width="85dp"
             android:layout_height="40dp"
             android:id="@+id/calculate"
             android:src="@drawable/calculate" />
+
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="50dp"
+            android:id="@+id/map"
+            android:src="@drawable/clickmap" />
     </LinearLayout>
 
 

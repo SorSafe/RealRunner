@@ -40,7 +40,7 @@ public class Login extends Activity {
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandler db;
-    private ImageView btnLogin;
+    private Button btnLogin;
     private ImageView mImageViewForgot;
 
     @Override
@@ -52,7 +52,7 @@ public class Login extends Activity {
 
         inputUsername = (EditText) findViewById(R.id.usernameLog);
         inputPassword = (EditText) findViewById(R.id.passLog);
-        btnLogin = (ImageView) findViewById(R.id.bLogin);
+        btnLogin = (Button) findViewById(R.id.bLogin);
 
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);

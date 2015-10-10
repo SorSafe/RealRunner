@@ -34,7 +34,7 @@ import java.util.Map;
 public class Register extends Activity {
 
     private static final String TAG = Register.class.getSimpleName();
-    private ImageView btnRegister;
+    private Button btnRegister;
     private EditText inputUserName;
     private EditText inputEmail;
     private EditText inputUserGameName;
@@ -52,7 +52,7 @@ public class Register extends Activity {
         inputPassword = (EditText) findViewById(R.id.passReg);
         inputUserGameName = (EditText) findViewById(R.id.nameReg);
         inputEmail = (EditText) findViewById(R.id.gmailReg);
-        btnRegister = (ImageView) findViewById(R.id.bRegis);
+        btnRegister = (Button) findViewById(R.id.bRegis);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);

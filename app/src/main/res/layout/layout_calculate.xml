@@ -196,8 +196,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text=""
             android:id="@+id/bmi"
-            android:layout_marginRight="10dp"
-            android:enabled="false" />
+            android:layout_marginRight="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -211,8 +210,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text=""
-            android:id="@+id/status"
-            android:enabled="false"/>
+            android:id="@+id/status" />
     </LinearLayout>
 
     <LinearLayout
@@ -238,8 +236,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text=""
             android:id="@+id/bmr"
-            android:layout_marginRight="20dp"
-            android:enabled="false"/>
+            android:layout_marginRight="20dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -252,8 +249,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/TDEE"
-            android:enabled="false"/>
+            android:id="@+id/TDEE" />
     </LinearLayout>
 
     <LinearLayout

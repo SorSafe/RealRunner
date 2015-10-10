@@ -45,6 +45,7 @@ public class Tab_Profile extends AppCompatActivity {
     private ImageView mImageViewMemoryBook;
     private ImageView mImageViewProfile;
     private ImageView mImageViewEditName;
+    private ImageView mImageViewMap;
     private int SELECT_IMAGE = 2;
 
     private SQLiteHandler db;
@@ -153,13 +154,13 @@ public class Tab_Profile extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // Check username password
                         //if (old_name.getText().equals("demo@example.com") &&
-                         //       new_name.getText().equals("demo")) {
-                         //   Toast.makeText(getApplicationContext(), "Edit Failed",
-                          //          Toast.LENGTH_SHORT).show();
-                      //  } else {
-                                checkUpdate(old_Name,new_Name);
-                                nameField.setText(new_Name);
-                       // }
+                        //       new_name.getText().equals("demo")) {
+                        //   Toast.makeText(getApplicationContext(), "Edit Failed",
+                        //          Toast.LENGTH_SHORT).show();
+                        //  } else {
+                        checkUpdate(old_Name, new_Name);
+                        nameField.setText(new_Name);
+                        // }
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -170,6 +171,13 @@ public class Tab_Profile extends AppCompatActivity {
                 });
 
                 builder.show();
+            }
+        });
+
+        mImageViewMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Tab_Map.class));
             }
         });
 
@@ -285,6 +293,7 @@ public class Tab_Profile extends AppCompatActivity {
         mImageViewMemoryBook = (ImageView) findViewById(R.id.book);
         mImageViewProfile = (ImageView) findViewById(R.id.pic_profile);
         mImageViewEditName = (ImageView) findViewById(R.id.edit_name);
+        mImageViewMap = (ImageView) findViewById(R.id.map);
     }
 
 }

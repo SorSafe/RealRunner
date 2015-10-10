@@ -61,7 +61,7 @@ public class Tab_Ranking extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_ranking);
 
- //       LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
+        //       LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
 //        linearLayout.setBackgroundColor(Color.parseColor("#3982d9"));
 
         listView = (ListView) findViewById(R.id.listUserRank);

@@ -6,13 +6,15 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.acerth.realrunner.Register">
 
-    <ImageView
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:id="@+id/reg"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/line" />
+        android:text="Register"
+        android:background="#48b1ff"
+        android:textColor="#f8fcff" />
 
     <TextView
         android:text="Register"
@@ -113,7 +115,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_marginLeft="31dp"
-            android:text="Gmail :"
+            android:text="Email :"
             android:id="@+id/tGmail" />
 
         <EditText
@@ -127,11 +129,13 @@
     </LinearLayout>
 
 
-    <ImageView
+    <Button
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:id="@+id/bRegis"
-        android:src="@drawable/regis"
+        android:text="Register"
+        android:background="#48b1ff"
+        android:textColor="#f8fcff"
         android:layout_below="@+id/area4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp" />
