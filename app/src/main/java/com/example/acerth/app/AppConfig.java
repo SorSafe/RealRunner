@@ -9,4 +9,6 @@ public class AppConfig {
     public static String URL_SHOWUSER = "http://iearth.in.th/project/android_login_api/showAllUser.php";
     public static String URL_UPDATE_NAME = "http://iearth.in.th/project/android_login_api/update_name.php";
     public static String URL_SHOW_RANKING = "http://iearth.in.th/project/android_login_api/showAllRanking.php";
+    public static String URL_USERPLAYMAP = "http://iearth.in.th/project/android_login_api/getformplaymap.php";
+
 }

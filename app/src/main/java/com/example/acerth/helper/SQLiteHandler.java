@@ -25,6 +25,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         // Login table name
         private static final String TABLE_USER = "login";
+        private static final String TABLE_USERPLAYMAP = "tab_Map";
 
         // Login Table Columns names
         private static final String KEY_ID = "user_id";
@@ -40,6 +41,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         private static final String KEY_DISTANCE = "distance";
         private static final String KEY_CALORIES = "calories";
         private static final String KEY_ADMIN_ID = "admin_id";
+
+        private static final String KEY_STEP = "step";
+        private static final String KEY_ELAPSEDTIME = "elapsedTime";
+        private static final String KEY_TIMESTART = "time_start";
+        private static final String KEY_TIMESTOP = "time_stop";
         private String val;
 
         public SQLiteHandler(Context context) {
@@ -206,6 +212,27 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         db.close();
 
         Log.d(TAG, "Deleted all user info from sqlite");
+    }
+
+    public void addplayData(int user_id,float distance,int calories,int step,String elapsedTime,String time_start,String time_stop) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_ID, user_id); //user_id
+        values.put(KEY_DISTANCE, distance); // distance
+        values.put(KEY_CALORIES, calories); // calories
+        values.put(KEY_STEP, step); // step
+        values.put(KEY_ELAPSEDTIME, elapsedTime); // elapsedTime
+        values.put(KEY_TIMESTART, time_start); // time_start
+        values.put(KEY_TIMESTOP, time_stop); // time_stop
+
+
+        // Inserting Row
+        long id = db.insert(TABLE_USERPLAYMAP, null, values);
+        db.close(); // Closing database connection
+
+        Log.d(TAG, "New user inserted into sqlite: " + id);
     }
 
 }

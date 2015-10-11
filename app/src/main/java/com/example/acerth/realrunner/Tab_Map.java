@@ -2,6 +2,7 @@ package com.example.acerth.realrunner;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ServiceConnection;
@@ -24,9 +25,25 @@ import com.android.pedometer.source.Utils;
 import com.android.pedometer.source.PedometerSettings;
 import com.android.pedometer.source.StepService;
 import com.android.pedometer.source.StopwatchService;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.acerth.app.AppConfig;
+import com.example.acerth.app.AppController;
 import com.example.acerth.helper.SQLiteHandler;
+import com.example.acerth.helper.SessionManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 @SuppressLint("HandlerLeak")
 public class Tab_Map extends Activity {
@@ -66,9 +83,13 @@ public class Tab_Map extends Activity {
     private final long mFrequency = 100; // milliseconds
     private final int TICK_WHAT = 2;
     // ---------------Stop Timer ------------
-
+    private SessionManager session;
     private SQLiteHandler db;
-    private String user_id;
+    private int user_id ;
+    private static final String url = AppConfig.URL_USERPLAYMAP;
+    private ProgressDialog pDialog;
+    private String time_start;
+    private String time_stop;
 
     /**
      * True, when service is running.
@@ -85,8 +106,7 @@ public class Tab_Map extends Activity {
         db = new SQLiteHandler(getApplicationContext());
 
         HashMap<String, String> user = db.getUserDetails();
-
-        user_id = user.get("user_id");
+        user_id = Integer.parseInt(user.get("user_id"));
 
         mStepValue = 0;
         mPaceValue = 0;
@@ -136,8 +156,7 @@ public class Tab_Map extends Activity {
         button_start = (ImageView) findViewById(R.id.button_start);
         button_pause = (ImageView) findViewById(R.id.button_pause);
         button_stop = (ImageView) findViewById(R.id.button_stop);
-        mHandler.sendMessageDelayed(Message.obtain(mHandler, TICK_WHAT),
-                mFrequency);
+        mHandler.sendMessageDelayed(Message.obtain(mHandler, TICK_WHAT), mFrequency);
 
 
         mMaintain = mPedometerSettings.getMaintainOption();
@@ -155,16 +174,18 @@ public class Tab_Map extends Activity {
             public void onClick(View v) {
                 startStepService();
                 bindStepService();
+                Calendar c = Calendar.getInstance();
+                Date timestamp = new Date(c.get(Calendar.YEAR)-1900,c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),c.get(Calendar.HOUR),c.get(Calendar.MINUTE),c.get(Calendar.SECOND));
+                DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                time_start = dateFormatter.format(timestamp);
+                System.out.println("Time Start "+time_start);
                 m_stopwatchService.start();
-
             }
         });
 
         button_pause.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String _status = txtStatus.getText().toString().trim();
-
                 if (mIsRunning) {
                     Toast.makeText(getApplicationContext(), "Pause", Toast.LENGTH_SHORT).show();
                     unbindStepService();
@@ -178,8 +199,28 @@ public class Tab_Map extends Activity {
         button_stop.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                unbindStepService();
-//                stopStepService();
+
+                HashMap<String, String> user = db.getUserDetails();
+                user_id = Integer.parseInt(user.get("user_id"));
+                float distance = mDistanceValue;
+                int calories =mCaloriesValue;
+                int step = mStepValue;
+                String elapsedTime = m_elapsedTime.getText().toString();
+
+                Calendar c = Calendar.getInstance();
+                Date timestamp = new Date(c.get(Calendar.YEAR)-1900,c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),c.get(Calendar.HOUR),c.get(Calendar.MINUTE),c.get(Calendar.SECOND));
+                DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                time_stop = dateFormatter.format(timestamp);
+                System.out.println("Time Stop "+time_stop);
+
+                insertPlayData(user_id, distance, calories, step, elapsedTime,time_start,time_stop);
+                Log.d("INSERT user id : ", String.valueOf(user_id));
+                Log.d("INSERT distance : ", String.valueOf(distance));
+                Log.d("INSERT calories  : ", String.valueOf(calories));
+                Log.d("INSERT step : ", String.valueOf(step));
+                Log.d("INSERT elapsedTime : ", elapsedTime);
+                Log.d("INSERT time start : ", time_start);
+                Log.d("INSERT time stop : ", time_stop);
                 resetValues(true);
                 m_stopwatchService.reset();
                 getData();
@@ -236,11 +277,6 @@ public class Tab_Map extends Activity {
 
         super.onDestroy();
     }
-
-//    protected void onRestart() {
-//        Log.i(TAG, "[ACTIVITY] onRestart");
-//        super.onDestroy();
-//    }
 
     private void setDesiredPaceOrSpeed(float desiredPaceOrSpeed) {
         if (mService != null) {
@@ -542,5 +578,92 @@ public class Tab_Map extends Activity {
         String _calories = mCaloriesValueView.getText().toString().trim();
         String _time = m_elapsedTime.getText().toString().trim();
     }
+
+    private void insertPlayData(final int user_id, final float distance, final int calories, final int step, final String elapsedTime, final String time_start, final  String time_stop) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_register";
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_USERPLAYMAP, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Insert Data Response: " + response.toString());
+//                hideDialog();
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+                        // User successfully stored in MySQL
+                        // Now store the user in sqlite
+                        JSONObject user = jObj.getJSONObject("user");
+
+                        int user_id = user.getInt("user_id");
+                        float distance = Float.parseFloat(user.getString("distance"));
+                        int calories = user.getInt("calories");
+                        int step = user.getInt("step");
+                        String elapsedTime = user.getString("elapsedTime");
+                        String time_start = user.getString("time_start");
+                        String time_stop = user.getString("time_stop");
+
+                        // Inserting row in users table
+                        db.addplayData(user_id, distance, calories, step, elapsedTime,time_start,time_stop);
+
+                        String msg = jObj.getString("msg");
+                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+
+                    } else {
+
+                        // Error occurred in registration. Get the error
+                        // message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Insert Data Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+//                hideDialog();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_id", String.valueOf(user_id));
+                params.put("distance", String.valueOf(distance));
+                params.put("calories", String.valueOf(calories));
+                params.put("step", String.valueOf(step));
+                params.put("elapsedTime", elapsedTime);
+                params.put("time_start", time_start);
+                params.put("time_stop", time_stop);
+
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    /*private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }*/
 
 }
