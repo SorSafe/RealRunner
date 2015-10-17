@@ -190,7 +190,7 @@ public class Calculate extends Activity {
         double bmi = wieght / Math.pow(hieght / 100, 2);
         bmiStr = bmi+"";
 
-        bmiValue.setText(bmiStr);
+        bmiValue.setText(bmiStr.substring(0,5));
 
         if (bmi >= 40) {
             statusValue.setText("The Most Obeysity");
@@ -219,14 +219,14 @@ public class Calculate extends Activity {
             double femalebmr = 665+(9.6*wieght)+(1.8*hieght)-(4.7*age);
             bmrStr = femalebmr+"";
         }
-        bmrValue.setText(bmrStr);
+        bmrValue.setText(bmrStr.substring(0,4));
     }
 
     public void calculateTDEE(){
         double bmr = Double.parseDouble(bmrValue.getText().toString());
         double tdee = bmr*mutiply;
         tdeeStr = tdee+"";
-        tdeeValue.setText(tdeeStr);
+        tdeeValue.setText(tdeeStr.substring(0,4));
     }
 
 }
