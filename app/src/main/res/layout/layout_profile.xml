@@ -25,37 +25,72 @@
 
     </LinearLayout>
 
-
     <LinearLayout
+        android:id="@+id/area_name"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/profile">
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/pic_profile"
             android:text=""
             android:layout_marginRight="10dp"
+            android:layout_gravity="center_horizontal"
             android:textSize="30sp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:gravity="center_horizontal"
-            android:foregroundGravity="center_horizontal" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/edit_name"
-            android:src="@drawable/pencil" />
+            android:src="@drawable/pencil"
+            android:layout_gravity="center_vertical" />
     </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/area_id"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/area_name">
+
+        <TextView
+            android:id="@+id/t_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID :"
+            android:textSize="20sp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginRight="10dp"
+            android:gravity="center_horizontal"
+            android:foregroundGravity="center_horizontal"
+            android:textColor="#919191" />
+
+        <TextView
+            android:id="@+id/u_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="20sp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:gravity="center_horizontal"
+            android:foregroundGravity="center_horizontal"
+            android:textColor="#919191"/>
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/descript"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profile"
+        android:layout_below="@+id/area_id"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp">
 

@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_centerHorizontal="true"
     android:background="@drawable/list_row_selector"
-    android:padding="8dp" >
+    android:padding="20dp" >
 
     <!-- Image -->
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/healthPic"
+        android:layout_marginLeft="15dp"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="8dp" />
+        android:layout_marginRight="15dp" />
 
     <!-- Topic -->
     <TextView
         android:id="@+id/healthTopic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/healthPic"
-        android:layout_toRightOf="@+id/healthPic"
-        android:textSize="@dimen/user_name"
-        android:textStyle="bold" />
+        android:layout_margin="20dp"
+        android:text=""
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_gravity="center_vertical" />
 
     <!--TextView
         android:id="@+id/healthDesc"

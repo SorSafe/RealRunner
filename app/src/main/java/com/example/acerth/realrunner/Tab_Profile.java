@@ -56,6 +56,7 @@ public class Tab_Profile extends AppCompatActivity {
     private TextView nameField;
     private TextView caloriesField;
     private TextView distanceField;
+    private TextView idField;
     private String user_id;
     private String user_game_name;
     private String user_image_name;
@@ -72,6 +73,7 @@ public class Tab_Profile extends AppCompatActivity {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
 //        linearLayout.setBackgroundColor(Color.parseColor("#f62355"));
 
+        idField = (TextView) findViewById(R.id.u_id);
         nameField = (TextView) findViewById(R.id.name);
         caloriesField = (TextView) findViewById(R.id.cal);
         distanceField = (TextView) findViewById(R.id.dis);
@@ -87,6 +89,7 @@ public class Tab_Profile extends AppCompatActivity {
         distance = user.get("distance");
 
         // Displaying the user details on the screen
+        idField.setText(user_id);
         nameField.setText(user_game_name);
         caloriesField.setText(calories);
         distanceField.setText(distance);

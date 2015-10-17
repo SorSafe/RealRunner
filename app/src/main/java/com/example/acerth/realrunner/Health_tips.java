@@ -207,6 +207,7 @@ public class Health_tips extends Activity {
                         alert.show();
                         break;
                 }
+
             }
         });
     }
