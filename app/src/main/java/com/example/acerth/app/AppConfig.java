@@ -10,5 +10,6 @@ public class AppConfig {
     public static String URL_UPDATE_NAME = "http://iearth.in.th/project/android_login_api/update_name.php";
     public static String URL_SHOW_RANKING = "http://iearth.in.th/project/android_login_api/showAllRanking.php";
     public static String URL_USERPLAYMAP = "http://iearth.in.th/project/android_login_api/getformplaymap.php";
-
+    public static String URL_GETHEALTHTIPSDATA = "http://iearth.in.th/project/android_login_api/getHealthTipsData.php";
+    public static String URL_UPLOAD_IMAGE = "http://iearth.in.th/project/PageUploadToMySQL2.php";
 }

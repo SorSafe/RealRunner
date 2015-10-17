@@ -86,7 +86,7 @@ public class Welcome extends Activity {
         db.deleteUsers();
 
         // Launching the login activity
-        Intent intent = new Intent(Welcome.this, Login.class);
+        Intent intent = new Intent(Welcome.this, MainActivity.class);
         startActivity(intent);
         finish();
     }

@@ -360,20 +360,6 @@ public class StepService extends Service {
 	 * Show a notification while this service is running.
 	 */
 	private void showNotification() {
-//		CharSequence text = getText(R.string.app_name);
-//		Notification notification = new Notification(
-//				R.drawable.ic_notification, null, System.currentTimeMillis());
-//		notification.flags = Notification.FLAG_NO_CLEAR
-//				| Notification.FLAG_ONGOING_EVENT;
-//		Intent pedometerIntent = new Intent();
-//		pedometerIntent.setComponent(new ComponentName(this, Tab_Map.class));
-//		pedometerIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-//				pedometerIntent, 0);
-//		notification.setLatestEventInfo(this, text,
-//				getText(R.string.notification_subtitle), contentIntent);
-//
-//		mNM.notify(R.string.app_name, notification);
 		CharSequence text = getText(R.string.app_name);
 		Notification notification = new Notification(
 				R.drawable.ic_notification, null, System.currentTimeMillis());

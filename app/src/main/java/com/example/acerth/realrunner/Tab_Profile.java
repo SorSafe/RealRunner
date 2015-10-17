@@ -24,6 +24,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.acerth.app.AppConfig;
 import com.example.acerth.app.AppController;
 import com.example.acerth.helper.SQLiteHandler;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,7 +56,9 @@ public class Tab_Profile extends AppCompatActivity {
     private TextView nameField;
     private TextView caloriesField;
     private TextView distanceField;
+    private String user_id;
     private String user_game_name;
+    private String user_image_name;
     private String calories;
     private String distance;
 
@@ -75,8 +80,9 @@ public class Tab_Profile extends AppCompatActivity {
         db = new SQLiteHandler(getApplicationContext());
 
         HashMap<String, String> user = db.getUserDetails();
-
+        user_id = user.get("user_id");
         user_game_name = user.get("user_game_name");
+        user_image_name = user.get("user_image_name");
         calories = user.get("calories");
         distance = user.get("distance");
 
@@ -84,6 +90,9 @@ public class Tab_Profile extends AppCompatActivity {
         nameField.setText(user_game_name);
         caloriesField.setText(calories);
         distanceField.setText(distance);
+
+        Picasso.with(this).load(user_image_name).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(mImageViewProfile);
+
     }
 
     private void setWidgetEventListener() {
@@ -108,27 +117,31 @@ public class Tab_Profile extends AppCompatActivity {
         mImageViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder =
-                        new AlertDialog.Builder(Tab_Profile.this);
-                builder.setMessage("Do you want to change profile picture ?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+//                AlertDialog.Builder builder =
+//                        new AlertDialog.Builder(Tab_Profile.this);
+//                builder.setMessage("Do you want to change profile picture ?");
+//                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int id) {
 //                        Toast.makeText(getApplicationContext(),
 //                                "hello", Toast.LENGTH_SHORT).show();
 
+                ImageView pick = (ImageView) findViewById(R.id.pic_profile);
+                pick.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
                         Intent intent = new Intent();
                         intent.setType("image/*");
                         intent.setAction(Intent.ACTION_GET_CONTENT);//
                         getParent().startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
                     }
                 });
-                builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.show();
+//                builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//                builder.show();
             }
         });
         mImageViewEditName.setOnClickListener(new View.OnClickListener() {
@@ -266,25 +279,25 @@ public class Tab_Profile extends AppCompatActivity {
             pDialog.dismiss();
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SELECT_IMAGE) {
-            if (resultCode == this.RESULT_OK) {
-                if (data != null) {
-                    try {
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-                        mImageViewProfile.setImageBitmap(bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                } else if (resultCode == this.RESULT_CANCELED) {
-                    Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == SELECT_IMAGE) {
+//            if (resultCode == this.RESULT_OK) {
+//                if (data != null) {
+//                    try {
+//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+//                        mImageViewProfile.setImageBitmap(bitmap);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                } else if (resultCode == this.RESULT_CANCELED) {
+//                    Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        }
+//    }
 
 
     private void bindWidget() {

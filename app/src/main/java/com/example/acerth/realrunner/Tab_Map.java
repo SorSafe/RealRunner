@@ -211,9 +211,9 @@ public class Tab_Map extends Activity {
                 Date timestamp = new Date(c.get(Calendar.YEAR)-1900,c.get(Calendar.MONTH),c.get(Calendar.DAY_OF_MONTH),c.get(Calendar.HOUR),c.get(Calendar.MINUTE),c.get(Calendar.SECOND));
                 DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 time_stop = dateFormatter.format(timestamp);
-                System.out.println("Time Stop "+time_stop);
+                System.out.println("Time Stop " + time_stop);
 
-                insertPlayData(user_id, distance, calories, step, elapsedTime,time_start,time_stop);
+                insertPlayData(user_id, distance, calories, step, elapsedTime, time_start, time_stop);
                 Log.d("INSERT user id : ", String.valueOf(user_id));
                 Log.d("INSERT distance : ", String.valueOf(distance));
                 Log.d("INSERT calories  : ", String.valueOf(calories));
@@ -222,6 +222,8 @@ public class Tab_Map extends Activity {
                 Log.d("INSERT time start : ", time_start);
                 Log.d("INSERT time stop : ", time_stop);
                 resetValues(true);
+                unbindStepService();
+                stopStepService();
                 m_stopwatchService.reset();
                 getData();
                 txtStatus.setText("Stop");
@@ -591,7 +593,7 @@ public class Tab_Map extends Activity {
                 Log.d(TAG, "Insert Data Response: " + response.toString());
 //                hideDialog();
 
-                try {
+               /* try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
@@ -624,7 +626,7 @@ public class Tab_Map extends Activity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
+                }*/
             }
         }, new Response.ErrorListener() {
 
