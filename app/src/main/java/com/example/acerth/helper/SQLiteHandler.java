@@ -147,7 +147,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_GAME_NAME, newName); // user_game_name
 
-        long id = db.update(TABLE_USER, values, KEY_ID + " = " + user_id, new String[]{String.valueOf(oldName)});
+        long id = db.update(TABLE_USER, values, KEY_ID + " = " + user_id,null);
         db.close(); // Closing database connection
 
         Log.d(TAG, "New game name of user update into sqlite: " + id);

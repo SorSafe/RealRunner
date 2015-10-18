@@ -26,6 +26,7 @@
         <activity android:name=".Add_Friends" />
         <activity android:name=".Calculate" />
         <activity android:name=".Health_tips" />
+        <activity android:name=".HistoryOfUser_Page" />
 
         <activity android:name=".MainActivity" >
             android:name=".MainActivity"

@@ -3,9 +3,7 @@ package com.example.acerth.realrunner;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -31,7 +29,6 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -114,7 +111,7 @@ public class Tab_Profile extends AppCompatActivity {
         mImageViewMemoryBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Health_tips.class));
+                startActivity(new Intent(getApplicationContext(), HistoryOfUser_Page.class));
             }
         });
         mImageViewProfile.setOnClickListener(new View.OnClickListener() {
@@ -162,21 +159,19 @@ public class Tab_Profile extends AppCompatActivity {
 
                 old_name.setText(user_game_name);
 
-                final String old_Name = old_name.getText().toString();
-                final String new_Name = new_name.getText().toString();
+
 
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Check username password
-                        //if (old_name.getText().equals("demo@example.com") &&
-                        //       new_name.getText().equals("demo")) {
-                        //   Toast.makeText(getApplicationContext(), "Edit Failed",
-                        //          Toast.LENGTH_SHORT).show();
-                        //  } else {
-                        checkUpdate(old_Name, new_Name);
-                        nameField.setText(new_Name);
-                        // }
+                        String user_old_game_name = old_name.getText().toString();
+                        String user_new_game_name = new_name.getText().toString();
+
+                        Log.d("PreonClickkkkkkkkk : ", user_id + " : " + user_old_game_name + " : " + user_new_game_name);
+                        checkUpdate(user_id, user_old_game_name, user_new_game_name);
+                        Log.d("onClickkkkkkkkk : ", user_id + " : " + user_old_game_name + " : " + user_new_game_name);
+                        nameField.setText(user_new_game_name);
+
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -199,20 +194,22 @@ public class Tab_Profile extends AppCompatActivity {
 
     }
 
-    public void checkUpdate(final String old_Name,final String new_Name){
+    public void checkUpdate(final String user_id, final String user_old_game_name, final String user_new_game_name){
         // Tag used to cancel the request
-        String tag_string_req = "req_update_name";
-
-        pDialog.setMessage("Updating your name ...");
-        showDialog();
+        final String tag_string_req = "req_update_name";
+        Log.d("Check in Update: ", user_id + user_old_game_name + user_new_game_name);
+        //pDialog.setMessage("Updating your name ...");
+        //showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.GET,
-                AppConfig.URL_UPDATE_NAME, new Response.Listener<String>() {
+                AppConfig.URL_UPDATE_NAME+"?user_id="+user_id+"&user_old_game_name="+user_old_game_name+"&user_new_game_name="+user_new_game_name, new Response.Listener<String>()
+        {
 
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Update Name Response: " + response.toString());
-                hideDialog();
+                Log.d("Check in Update: ", user_id + user_old_game_name + user_new_game_name);
+                //hideDialog();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -224,11 +221,11 @@ public class Tab_Profile extends AppCompatActivity {
                         JSONObject user = jObj.getJSONObject("user");
 
                         int user_id = user.getInt("user_id");
-                        String user_old_game_name = user.getString("user_old_game_name");
-                        String user_new_game_name = user.getString("user_new_game_name");
+                        String oldName = user.getString("user_old_game_name");
+                        String newName = user.getString("user_new_game_name");
 
                         // Inserting row in users table
-                        db.updateGamename(user_id,user_old_game_name,user_new_game_name);
+                        db.updateGamename(user_id,oldName,newName);
 
                         String msg = jObj.getString("msg");
                         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
@@ -244,7 +241,6 @@ public class Tab_Profile extends AppCompatActivity {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-
             }
         }, new Response.ErrorListener() {
 
@@ -253,7 +249,7 @@ public class Tab_Profile extends AppCompatActivity {
                 Log.e(TAG, "Login Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
-                hideDialog();
+                //hideDialog();
             }
         }) {
 
@@ -261,7 +257,7 @@ public class Tab_Profile extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("user_game_name", new_Name);
+                params.put("user_game_name",user_new_game_name);
 
                 return params;
             }
