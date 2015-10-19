@@ -485,7 +485,7 @@ public class Tab_Map extends Activity {
 
     public void checkpoint() {
         LinearLayout.LayoutParams params;
-        if (mStepValue >= 190) {
+        if (mStepValue >= 370) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             Picasso.with(this).load(user_image_name).into(mImageView);
@@ -494,7 +494,7 @@ public class Tab_Map extends Activity {
             params.topMargin = -20*2*3;
             mImageView.setLayoutParams(params);
         }
-        else if (mStepValue >= 160) {
+        else if (mStepValue >= 290) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             Picasso.with(this).load(user_image_name).into(mImageView);
@@ -504,7 +504,7 @@ public class Tab_Map extends Activity {
             params.topMargin = 8* 2 * 3;
             mImageView.setLayoutParams(params);
         }
-        else if (mStepValue >= 130) {
+        else if (mStepValue >= 220) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             Picasso.with(this).load(user_image_name).into(mImageView);
@@ -514,7 +514,7 @@ public class Tab_Map extends Activity {
             params.topMargin = 40*2*3;
             mImageView.setLayoutParams(params);
         }
-        else if (mStepValue >= 100) {
+        else if (mStepValue >= 160) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             Picasso.with(this).load(user_image_name).into(mImageView);
@@ -524,7 +524,7 @@ public class Tab_Map extends Activity {
             params.topMargin = 80*2*3;
             mImageView.setLayoutParams(params);
         }
-        else if (mStepValue >= 70) {
+        else if (mStepValue >= 110) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             Picasso.with(this).load(user_image_name).into(mImageView);
@@ -534,7 +534,7 @@ public class Tab_Map extends Activity {
             params.topMargin = 100*2*3;
             mImageView.setLayoutParams(params);
         }
-        else if (mStepValue >= 50) {
+        else if (mStepValue >= 70) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             Picasso.with(this).load(user_image_name).into(mImageView);
@@ -544,7 +544,7 @@ public class Tab_Map extends Activity {
             params.topMargin = 130*2*3;
             mImageView.setLayoutParams(params);
         }
-        else if (mStepValue >= 30) {
+        else if (mStepValue >= 40) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             Picasso.with(this).load(user_image_name).into(mImageView);
