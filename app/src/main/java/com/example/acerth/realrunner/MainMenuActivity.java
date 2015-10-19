@@ -78,12 +78,16 @@ public class MainMenuActivity extends AppCompatActivity {
                 .setIndicator("Ranking")
                 .setContent(new Intent(this, Tab_Ranking.class));
         TabHost.TabSpec tabSpec3 = tabHost.newTabSpec("tab3")
+                .setIndicator("History")
+                .setContent(new Intent(this, HistoryOfUser_Page.class));
+        TabHost.TabSpec tabSpec4 = tabHost.newTabSpec("tab4")
                 .setIndicator("Health Tips")
                 .setContent(new Intent(this, Health_tips.class));
 
         tabHost.addTab(tabSpec1);
         tabHost.addTab(tabSpec2);
         tabHost.addTab(tabSpec3);
+        tabHost.addTab(tabSpec4);
 
 
     }

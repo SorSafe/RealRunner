@@ -16,6 +16,7 @@ import com.example.acerth.app.AppController;
 import com.example.acerth.helper.CustomListAdapterHistoryOfUser;
 import com.example.acerth.helper.HistoryOfUser;
 import com.example.acerth.helper.SQLiteHandler;
+import com.yalantis.phoenix.PullToRefreshView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -107,6 +108,68 @@ public class HistoryOfUser_Page extends Activity {
         });
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(userReq);
+
+        final PullToRefreshView mPullToRefreshView = (PullToRefreshView) findViewById(R.id.refresh_layout);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d("hiii","Do in pull request ");
+                JsonArrayRequest userReq = new JsonArrayRequest(url+"?user_id="+user_id,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                Log.d("hiii","dddd "+response);
+                                // Parsing json
+                                for (int i = 0; i < response.length(); i++) {
+                                    try {
+
+                                        obj = response.getJSONObject(i);
+                                        his = new HistoryOfUser();
+                                        his.setDistance(Float.parseFloat(obj.getString("distance")));
+                                        his.setCalories(obj.getInt("calories"));
+                                        his.setStep(obj.getInt("step"));
+                                        his.setElapsedTime(obj.getString("elapsedTime"));
+                                        his.setTime_start(obj.getString("time_start"));
+                                        his.setTime_stop(obj.getString("time_stop"));
+
+                                        // adding movie to movies array
+                                        hisList.add(his);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+
+                                // notifying list adapter about data changes
+                                // so that it renders the list view with updated data
+                                adapter.notifyDataSetChanged();
+                                mPullToRefreshView.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mPullToRefreshView.setRefreshing(false);
+                                    }
+                                }, 1000);
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //VolleyLog.d(TAG, "Error: " + error.getMessage());
+                        Log.d("hiii","On Error Request");
+                        mPullToRefreshView.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mPullToRefreshView.setRefreshing(false);
+                            }
+                        }, 1000);
+
+                    }
+                });
+                AppController.getInstance().addToRequestQueue(userReq);
+
+            }
+        });
     }
 
     @Override
@@ -133,4 +196,6 @@ public class HistoryOfUser_Page extends Activity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
+
+
 }

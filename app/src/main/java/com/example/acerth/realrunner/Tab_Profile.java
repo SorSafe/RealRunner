@@ -108,12 +108,7 @@ public class Tab_Profile extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Calculate.class));
             }
         });
-        mImageViewMemoryBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), HistoryOfUser_Page.class));
-            }
-        });
+
         mImageViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -302,7 +297,6 @@ public class Tab_Profile extends AppCompatActivity {
     private void bindWidget() {
         mImageViewAddFriend = (ImageView) findViewById(R.id.add_friend);
         mImageViewCalculate = (ImageView) findViewById(R.id.calculate);
-        mImageViewMemoryBook = (ImageView) findViewById(R.id.book);
         mImageViewProfile = (ImageView) findViewById(R.id.pic_profile);
         mImageViewEditName = (ImageView) findViewById(R.id.edit_name);
         mImageViewMap = (ImageView) findViewById(R.id.map);
