@@ -6,14 +6,43 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <ListView
-        android:id="@+id/listUserRank"
-        android:layout_width="wrap_content"
-        android:layout_height="415dp"
-        android:divider="@color/list_divider"
-        android:dividerHeight="1dp"
-        android:listSelector="@drawable/list_row_selector"
-        android:layout_weight="1.15" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Overall Global"
+        android:id="@+id/overall"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/weeklyFriend"
+        android:layout_marginTop="96dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Overall Friends"
+        android:id="@+id/overallFriend"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weekly Global"
+        android:id="@+id/weekly"
+        android:layout_marginTop="58dp"
+        android:layout_below="@+id/overallFriend"
+        android:layout_alignEnd="@+id/weeklyFriend"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weekly friends"
+        android:id="@+id/weeklyFriend"
+        android:layout_below="@+id/weekly"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>
 

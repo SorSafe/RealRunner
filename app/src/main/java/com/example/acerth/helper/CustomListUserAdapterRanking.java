@@ -20,22 +20,22 @@ import com.example.acerth.realrunner.R;
 public class CustomListUserAdapterRanking extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
-    private List<User> userItems;
+    private List<UserRanking> userRankingItems;
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
-    public CustomListUserAdapterRanking(Activity activity, List<User> userItems) {
+    public CustomListUserAdapterRanking(Activity activity, List<UserRanking> userRankingItems) {
         this.activity = activity;
-        this.userItems = userItems;
+        this.userRankingItems = userRankingItems;
     }
 
     @Override
     public int getCount() {
-        return userItems.size();
+        return userRankingItems.size();
     }
 
     @Override
     public Object getItem(int location) {
-        return userItems.get(location);
+        return userRankingItems.get(location);
     }
 
     @Override
@@ -55,13 +55,13 @@ public class CustomListUserAdapterRanking extends BaseAdapter {
 
         NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.thumbnail);
         TextView userName = (TextView)convertView.findViewById(R.id.user_name_rank);
-        TextView userScore = (TextView)convertView.findViewById(R.id.user_score);
+        TextView sumDistance = (TextView)convertView.findViewById(R.id.user_score);
 
-        User u = userItems.get(position);
+        UserRanking u = userRankingItems.get(position);
 
-        thumbNail.setImageUrl(String.valueOf(u.getThumbnailUrl()), imageLoader);
+        thumbNail.setImageUrl(String.valueOf(u.getUser_image_name()), imageLoader);
         userName.setText(String.valueOf(u.getUser_game_name()));
-        userScore.setText(String.valueOf(u.getUser_score()));
+        sumDistance.setText(String.valueOf(u.getSumDistance()));
 
         return convertView;
     }

@@ -10,6 +10,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.acerth.app.AppConfig;
 import com.example.acerth.app.AppController;
+import com.example.acerth.helper.SQLiteHandler;
 import com.example.acerth.helper.User;
 import com.example.acerth.helper.CustomListAdapter;
 
@@ -71,19 +72,45 @@ public class Add_Friends extends Activity {
     private Button addFriend;
     private User user;
     private JSONObject obj;
+    private SQLiteHandler db;
+    private int user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_add_friend);
 
+        db = new SQLiteHandler(getApplicationContext());
+
+        HashMap<String, String> user = db.getUserDetails();
+        user_id = Integer.parseInt(user.get("user_id"));
 
         listView = (ListView) findViewById(R.id.listUser);
         search = (EditText) findViewById(R.id.search);
         addFriend = (Button) findViewById(R.id.addfriend);
 
-        adapter = new CustomListAdapter(this, userList);
+        adapter = new CustomListAdapter(this,userList);
         listView.setAdapter(adapter);
+
+        search = (EditText)findViewById(R.id.search);
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence cs, int start, int before, int count) {
+                // System.out.println("Text ["+cs+"]");
+                Add_Friends.this.adapter.getFilter().filter(cs);
+
+            }
+        });
 
         pDialog = new ProgressDialog(this);
         // Showing progress dialog before making http request
@@ -91,7 +118,7 @@ public class Add_Friends extends Activity {
         pDialog.show();
 
         // Creating volley request obj
-        JsonArrayRequest userReq = new JsonArrayRequest(url,
+        JsonArrayRequest userReq = new JsonArrayRequest(url+"?user_id="+user_id,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -103,7 +130,7 @@ public class Add_Friends extends Activity {
                             try {
 
                                 obj = response.getJSONObject(i);
-                                user = new User();
+                                final User user = new User();
                                 user.setUser_id(obj.getInt("user_id"));
                                 user.setThumbnailUrl(obj.getString("user_image_name"));
                                 user.setUser_game_name(obj.getString("user_game_name"));
@@ -131,17 +158,9 @@ public class Add_Friends extends Activity {
         });
 
         AppController.getInstance().addToRequestQueue(userReq);
-
-        /*addFriend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    addMyFriend();
-                }
-        });*/
-
-        // Adding request to request queue
-
     }
+
+
     /*private void setupSearchView() {
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) findViewById(R.id.searchView);
@@ -150,14 +169,22 @@ public class Add_Friends extends Activity {
         searchView.setSearchableInfo(searchableInfo);
     }*/
 
-    /*public void addMyFriend(){
+    public void clickAddMethod(View v){
+        int position = listView.getPositionForView(v);
+        User u = userList.get(position);
+        int friend_id = u.getUser_id();
+        db = new SQLiteHandler(getApplicationContext());
+        HashMap<String, String> user = db.getUserDetails();
+        user_id = Integer.parseInt(user.get("user_id"));
+
+        addMyFriend(friend_id,user_id);
+    }
+
+    public void addMyFriend(int friend_id, int user_id){
         String tag_string_req = "req_addFriend";
 
-        pDialog.setMessage("Adding other user to Friend...");
-        showDialog();
-
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_LOGIN, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                AppConfig.URL_ADD_FRIEND+"?friend_id="+friend_id+"&user_id="+user_id, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -171,24 +198,19 @@ public class Add_Friends extends Activity {
                     // Check for error node in json
                     if (!error) {
 
-                        JSONObject friend = jObj.getJSONObject("friend");
-
-                        int friend_id = friend.getInt("friend_id");
-                        int user_id = friend.getInt("user_id");
-
                         String msg = jObj.getString("msg");
                         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
 
                     } else {
                         // Error in login. Get the error message
-                        String errorMsg = jObj.getString("error_msg");
+                        String errorMsg = jObj.getString("msg");
                         Toast.makeText(getApplicationContext(),
                                 errorMsg, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Json error: You have added this friend Already !!!", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -232,7 +254,7 @@ public class Add_Friends extends Activity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-               // params.put("friend_id", friend_id);
+                // params.put("friend_id", friend_id);
 
                 return params;
             }
@@ -241,7 +263,7 @@ public class Add_Friends extends Activity {
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    }*/
+    }
 
     @Override
     public void onDestroy(){

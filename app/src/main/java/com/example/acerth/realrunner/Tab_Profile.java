@@ -15,8 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.acerth.app.AppConfig;
@@ -57,8 +63,8 @@ public class Tab_Profile extends AppCompatActivity {
     private String user_id;
     private String user_game_name;
     private String user_image_name;
-    private String calories;
-    private String distance;
+    private String caloriesStr;
+    private String distanceStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,14 +88,12 @@ public class Tab_Profile extends AppCompatActivity {
         user_id = user.get("user_id");
         user_game_name = user.get("user_game_name");
         user_image_name = user.get("user_image_name");
-        calories = user.get("calories");
-        distance = user.get("distance");
+
+        showSumCaloriesAndDistance(user_id);
 
         // Displaying the user details on the screen
         idField.setText(user_id);
         nameField.setText(user_game_name);
-        caloriesField.setText(calories);
-        distanceField.setText(distance);
 
         Picasso.with(this).load(user_image_name).memoryPolicy(MemoryPolicy.NO_CACHE).networkPolicy(NetworkPolicy.NO_CACHE).into(mImageViewProfile);
 
@@ -272,6 +276,92 @@ public class Tab_Profile extends AppCompatActivity {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
+
+    public void showSumCaloriesAndDistance(String user_id){
+        String tag_string_req = "req_showSumCaloriesAndDistance";
+
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                AppConfig.URL_SHOW_SUM_CALORIES_AND_DISTANCE+"?user_id="+user_id, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    if (!error) {
+
+                        JSONObject userplaymap = jObj.getJSONObject("userplaymap");
+
+                        double calories = userplaymap.getDouble("calories");
+                        double distance = userplaymap.getDouble("distance");
+
+                        distanceStr = distance+"";
+                        caloriesStr = calories+"";
+
+                        caloriesField.setText(caloriesStr);
+                        distanceField.setText(distanceStr);
+
+
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: You have added this friend Already !!!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+    }, new Response.ErrorListener() {
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            if (error instanceof NoConnectionError) {
+                Toast.makeText(getApplicationContext(), "NoConnectionError.......", Toast.LENGTH_LONG).show();
+
+            } else if (error instanceof AuthFailureError) {
+                Toast.makeText(getApplicationContext(), "AuthFailureError.......", Toast.LENGTH_LONG).show();
+
+            } else if (error instanceof ServerError) {
+                Toast.makeText(getApplicationContext(), "ServerError.......", Toast.LENGTH_LONG).show();
+
+            } else if (error instanceof NetworkError) {
+                Toast.makeText(getApplicationContext(), "NetworkError.......", Toast.LENGTH_LONG).show();
+
+            } else if (error instanceof ParseError) {
+                Toast.makeText(getApplicationContext(), "ParseError.......", Toast.LENGTH_LONG).show();
+
+            }else if (error instanceof TimeoutError) {
+                Toast.makeText(getApplicationContext(), "TimeoutError.......", Toast.LENGTH_LONG).show();
+            }
+            //Log.e(TAG, "Login Error: " + error.getMessage());
+            //Toast.makeText(getApplicationContext(),
+            //        error.getMessage(), Toast.LENGTH_LONG).show();
+            //hideDialog();
+        }
+    }) {
+
+        @Override
+        protected Map<String, String> getParams() {
+            // Posting parameters to login url
+            Map<String, String> params = new HashMap<String, String>();
+            // params.put("friend_id", friend_id);
+
+            return params;
+        }
+
+    };
+
+    // Adding request to request queue
+    AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+}
+
 
 //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //

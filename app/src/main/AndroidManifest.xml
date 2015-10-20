@@ -27,6 +27,10 @@
         <activity android:name=".Calculate" />
         <activity android:name=".Health_tips" />
         <activity android:name=".HistoryOfUser_Page" />
+        <activity android:name=".Tab_Ranking_Overall_Global" />
+        <activity android:name=".Tab_Ranking_Overall_Friends" />
+        <activity android:name=".Tab_Ranking_Weekly_Global" />
+        <activity android:name=".Tab_Ranking_Weekly_Friends" />
 
         <activity android:name=".MainActivity" >
             android:name=".MainActivity"
