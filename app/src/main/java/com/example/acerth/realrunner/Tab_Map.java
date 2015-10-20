@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,12 +20,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.Intent;
-import com.android.pedometer.source.Utils;
 
 import com.android.pedometer.source.PedometerSettings;
 import com.android.pedometer.source.StepService;
 import com.android.pedometer.source.StopwatchService;
+import com.android.pedometer.source.Utils;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,11 +33,8 @@ import com.example.acerth.app.AppConfig;
 import com.example.acerth.app.AppController;
 import com.example.acerth.helper.SQLiteHandler;
 import com.example.acerth.helper.SessionManager;
+import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -95,6 +92,7 @@ public class Tab_Map extends Activity {
      * True, when service is running.
      */
     private boolean mIsRunning;
+    private String user_image_name;
 
     /** Called when the activity is first created. */
     @Override
@@ -107,6 +105,7 @@ public class Tab_Map extends Activity {
 
         HashMap<String, String> user = db.getUserDetails();
         user_id = Integer.parseInt(user.get("user_id"));
+        user_image_name = user.get("user_image_name");
 
         mStepValue = 0;
         mPaceValue = 0;
@@ -114,6 +113,9 @@ public class Tab_Map extends Activity {
         setContentView(R.layout.activity_distance);
 
         mUtils = Utils.getInstance();
+
+        mImageView = (ImageView) findViewById(R.id.usermap);
+        Picasso.with(this).load(user_image_name).into(mImageView);
     }
 
     @Override
@@ -483,64 +485,70 @@ public class Tab_Map extends Activity {
 
     public void checkpoint() {
         LinearLayout.LayoutParams params;
-        if (mStepValue >= 190) {
+        if (mStepValue >= 370) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            mImageView.setImageResource(R.drawable.user_default);
+            Picasso.with(this).load(user_image_name).into(mImageView);
             params = new LinearLayout.LayoutParams(190, 190);
             params.leftMargin = 87*2*3;
             params.topMargin = -20*2*3;
             mImageView.setLayoutParams(params);
         }
-        else if (mStepValue >= 160) {
+        else if (mStepValue >= 290) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            mImageView.setImageResource(R.drawable.user_default);
+            Picasso.with(this).load(user_image_name).into(mImageView);
+            Log.d("mappp", "pic_profile");
             params = new LinearLayout.LayoutParams(190, 190);
             params.leftMargin = 70* 2 * 3;
             params.topMargin = 8* 2 * 3;
             mImageView.setLayoutParams(params);
         }
-        else if (mStepValue >= 130) {
+        else if (mStepValue >= 220) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            mImageView.setImageResource(R.drawable.user_default);
+            Picasso.with(this).load(user_image_name).into(mImageView);
+            Log.d("mappp", "pic_profile");
             params = new LinearLayout.LayoutParams(190, 190);
             params.leftMargin = 40*2*3;
             params.topMargin = 40*2*3;
             mImageView.setLayoutParams(params);
         }
-        else if (mStepValue >= 100) {
+        else if (mStepValue >= 160) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            mImageView.setImageResource(R.drawable.user_default);
+            Picasso.with(this).load(user_image_name).into(mImageView);
+            Log.d("mappp", "pic_profile");
             params = new LinearLayout.LayoutParams(190, 190);
             params.leftMargin = 1*2*3;
             params.topMargin = 80*2*3;
             mImageView.setLayoutParams(params);
         }
-        else if (mStepValue >= 70) {
+        else if (mStepValue >= 110) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            mImageView.setImageResource(R.drawable.user_default);
+            Picasso.with(this).load(user_image_name).into(mImageView);
+            Log.d("mappp", "pic_profile");
             params = new LinearLayout.LayoutParams(190, 190);
             params.leftMargin = 117*2*3;
             params.topMargin = 100*2*3;
             mImageView.setLayoutParams(params);
         }
-        else if (mStepValue >= 50) {
+        else if (mStepValue >= 70) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            mImageView.setImageResource(R.drawable.user_default);
+            Picasso.with(this).load(user_image_name).into(mImageView);
+            Log.d("mappp", "pic_profile");
             params = new LinearLayout.LayoutParams(190, 190);
             params.leftMargin = 125*2*3;
             params.topMargin = 130*2*3;
             mImageView.setLayoutParams(params);
         }
-        else if (mStepValue >= 30) {
+        else if (mStepValue >= 40) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            mImageView.setImageResource(R.drawable.user_default);
+            Picasso.with(this).load(user_image_name).into(mImageView);
+            Log.d("mappp", "pic_profile");
             params = new LinearLayout.LayoutParams(190, 190);
             params.leftMargin = 90*2*3;
             params.topMargin = 150*2*3;
@@ -549,7 +557,8 @@ public class Tab_Map extends Activity {
         else if (mStepValue >= 20) {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            mImageView.setImageResource(R.drawable.user_default);
+            Picasso.with(this).load(user_image_name).into(mImageView);
+            Log.d("mappp", "pic_profile");
             params = new LinearLayout.LayoutParams(190, 190);
             params.leftMargin = 98*2*3;
             params.topMargin = 180*2*3;
@@ -558,7 +567,8 @@ public class Tab_Map extends Activity {
         } else {
             mImageView = (ImageView) findViewById(R.id.usermap);
             mImageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            mImageView.setImageResource(R.drawable.user_default);
+            Picasso.with(this).load(user_image_name).into(mImageView);
+            Log.d("mappp", "pic_profile");
             params = new LinearLayout.LayoutParams(190, 190);
             params.leftMargin = 85*2*3;
             params.topMargin = 200*2*3;
