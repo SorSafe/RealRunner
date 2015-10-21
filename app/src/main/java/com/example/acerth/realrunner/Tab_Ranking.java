@@ -4,17 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.acerth.helper.SessionManager;
 
 
 public class Tab_Ranking extends Activity {
 
-    private Button btnOverall;
-    private Button btnoverallFriend;
-    private Button btnWeekly;
-    private Button btnWeeklyFriend;
+    private ImageButton btnOverall;
+    private ImageButton btnoverallFriend;
+    private ImageButton btnWeekly;
+    private ImageButton btnWeeklyFriend;
     private SessionManager session;
 
     @Override
@@ -25,10 +25,10 @@ public class Tab_Ranking extends Activity {
         // session manager
         session = new SessionManager(getApplicationContext());
 
-        btnOverall = (Button) findViewById(R.id.overall);
-        btnoverallFriend = (Button) findViewById(R.id.overallFriend);
-        btnWeekly = (Button) findViewById(R.id.weekly);
-        btnWeeklyFriend = (Button) findViewById(R.id.weeklyFriend);
+        btnOverall = (ImageButton) findViewById(R.id.overall);
+        btnoverallFriend = (ImageButton) findViewById(R.id.overallFriend);
+        btnWeekly = (ImageButton) findViewById(R.id.weekly);
+        btnWeeklyFriend = (ImageButton) findViewById(R.id.weeklyFriend);
 
         btnOverall.setOnClickListener(new View.OnClickListener() {
 

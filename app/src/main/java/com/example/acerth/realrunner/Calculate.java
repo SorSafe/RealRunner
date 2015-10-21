@@ -34,6 +34,7 @@ public class Calculate extends Activity {
     private double mutiply;
     private String genderChosen;
     private ImageView mQuestion;
+    private TextView bStandard;
 
     EditText wieghtValue;
     EditText hieghtValue;
@@ -155,10 +156,35 @@ public class Calculate extends Activity {
             public void onClick(View view) {
                 AlertDialog.Builder builder =
                         new AlertDialog.Builder(Calculate.this);
-                builder.setMessage("BMI คือ ค่าที่บ่งบอกภาวะอ้วนและผอมในผู้ใหญ่ " +
-                        "\n Status คือ สถานะบ่งบอกความอ้วนและผอมในผู้ใหญ่ "+
-                        "\n BMR คือ อัตราการความต้องการเผาผลาญพื้นฐานในชีวิตประจำวัน " +
-                        "\n TDEE คือ พลังงานที่ใช้ทั้งหมดในชีวิตประจำวัน");
+                builder.setMessage("BMI คือ ค่าที่บ่งบอกภาวะอ้วนและผอมในผู้ใหญ่\n" +
+                        "\nStatus คือ สถานะบ่งบอกความอ้วนและผอมในผู้ใหญ่\n"+
+                        "\nBMR คือ อัตราการความต้องการเผาผลาญพื้นฐานในชีวิตประจำวัน\n" +
+                        "\nTDEE คือ พลังงานที่ใช้ทั้งหมดในชีวิตประจำวัน\n");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+        });
+
+        bStandard = (TextView) findViewById(R.id.standard);
+        bStandard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(Calculate.this);
+                builder.setMessage("BMI น้อยกว่า 18.50" +
+                        "\n อยู่ในเกณฑ์น้ำหนักน้อย \nมีภาวะเสี่ยงต่อโรคมากกว่าคนปกติ\n"+
+                        "\n BMI อยู่ระหว่าง 18.50 - 22.90 " +
+                        "\n อยู่ในเกณฑ์ปกติ \nมีภาวะเสี่ยงต่อโรคเท่ากับคนปกติ\n"+
+                        "\n BMI อยู่ระหว่าง 23 - 24.90" +
+                        "\n อยู่ในเกณฑ์โรคอ้วนระดับ 1 \nมีภาวะเสี่ยงต่อโรคอันตรายระดับ 1\n"+
+                        "\n BMI อยู่ระหว่าง 25 - 29.90" +
+                        "\n อยู่ในเกณฑ์โรคอ้วนระดับ 2 \nมีภาวะเสี่ยงต่อโรคอันตรายระดับ 2\n"+
+                        "\n BMI มากกว่า 30" +
+                        "\n อยู่ในเกณฑ์โรคอ้วนระดับ 3 \nมีภาวะเสี่ยงต่อโรคอันตรายระดับ 3\n");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();

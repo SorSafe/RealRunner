@@ -30,7 +30,7 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/profile">
 
         <TextView
@@ -86,52 +86,84 @@
     </LinearLayout>
 
 
+
+
     <LinearLayout
-        android:id="@+id/descript"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/description"
+        android:orientation="horizontal"
         android:layout_below="@+id/area_id"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp">
-
-        <TextView
-            android:id="@+id/cal"
-            android:textSize="20sp"
-            android:layout_width="150px"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:layout_gravity="center"
-            android:gravity="center" />
-
-        <TextView
-            android:id="@+id/Tcal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile"
-            android:layout_marginLeft="10dp"
-            android:textSize="20sp"
-            android:text="Calories"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-
-        <TextView
-            android:id="@+id/dis"
-            android:layout_width="150px"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text=""
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp" />
-
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/Tdis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/profile"
-            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
             android:textSize="20sp"
             android:text="Distance"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/dis"
+            android:layout_width="160px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=""
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/Udis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textSize="20sp"
+            android:text="km."
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/descript2"
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:id="@+id/Tcal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="21dp"
+            android:textSize="20sp"
+            android:text="Calories"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/cal"
+            android:textSize="20sp"
+            android:layout_width="160px"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginRight="13dp"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/Ucal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="kcal."
+            android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>
@@ -141,7 +173,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/descript"
+        android:layout_below="@+id/descript2"
         android:layout_gravity="center_horizontal"
         android:gravity="center">
 
@@ -166,7 +198,6 @@
             android:id="@+id/map"
             android:src="@drawable/clickmap" />
     </LinearLayout>
-
 
 
 </LinearLayout>
