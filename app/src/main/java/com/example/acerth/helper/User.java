@@ -55,4 +55,12 @@ public class User {
     public void setUser_score(double user_score) {
         this.user_score = user_score;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + user_id +
+                ", user_game_name='" + user_game_name + '\'' +
+                '}';
+    }
 }

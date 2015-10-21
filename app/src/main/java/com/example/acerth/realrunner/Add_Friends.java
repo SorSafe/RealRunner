@@ -134,7 +134,7 @@ public class Add_Friends extends Activity {
                                 user.setUser_id(obj.getInt("user_id"));
                                 user.setThumbnailUrl(obj.getString("user_image_name"));
                                 user.setUser_game_name(obj.getString("user_game_name"));
-
+                                user.toString();
                                 // adding movie to movies array
                                 userList.add(user);
 
