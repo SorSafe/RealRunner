@@ -47,8 +47,8 @@ public class Login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        blindWidget();
-        setWidgetEventListener();
+        //blindWidget();
+        //setWidgetEventListener();
 
         inputUsername = (EditText) findViewById(R.id.usernameLog);
         inputPassword = (EditText) findViewById(R.id.passLog);
@@ -234,9 +234,9 @@ public class Login extends Activity {
     }
 
 
-    private void blindWidget() {
+   /* private void blindWidget() {
         mImageViewForgot = (ImageView)findViewById(R.id.forgot);
-    }
+    }*/
 
    /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {

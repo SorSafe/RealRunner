@@ -2,9 +2,12 @@ package com.example.acerth.realrunner;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.android.volley.Response;
@@ -33,6 +36,7 @@ public class Tab_Ranking_Overall_Global extends Activity{
     //private SearchView searchView;
     private UserRanking userRank;
     private JSONObject obj;
+    private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,15 @@ public class Tab_Ranking_Overall_Global extends Activity{
 
         //       LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
 //        linearLayout.setBackgroundColor(Color.parseColor("#3982d9"));
+        btnBack = (Button)findViewById(R.id.back1);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainMenuActivity.class));
+
+            }
+        });
 
         listView = (ListView) findViewById(R.id.listUserRank);
         adapter = new CustomListUserAdapterRanking(this, userList);

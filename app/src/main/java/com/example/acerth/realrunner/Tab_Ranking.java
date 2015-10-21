@@ -28,7 +28,7 @@ public class Tab_Ranking extends Activity {
         btnOverall = (ImageButton) findViewById(R.id.overall);
         btnoverallFriend = (ImageButton) findViewById(R.id.overallFriend);
         btnWeekly = (ImageButton) findViewById(R.id.weekly);
-        btnWeeklyFriend = (ImageButton) findViewById(R.id.weeklyFriend);
+        btnWeeklyFriend = (ImageButton) findViewById(R.id.weeklyFriends);
 
         btnOverall.setOnClickListener(new View.OnClickListener() {
 
@@ -36,9 +36,8 @@ public class Tab_Ranking extends Activity {
             public void onClick(View v) {
                 session.setLogin(true);
 
-                Intent intent = new Intent(Tab_Ranking.this, Tab_Ranking_Overall_Global.class);
-                startActivity(intent);
-                finish();
+                startActivity(new Intent(getApplicationContext(), Tab_Ranking_Overall_Global.class));
+
             }
         });
 
@@ -48,9 +47,7 @@ public class Tab_Ranking extends Activity {
             public void onClick(View v) {
                 session.setLogin(true);
 
-                Intent intent = new Intent(Tab_Ranking.this, Tab_Ranking_Overall_Friends.class);
-                startActivity(intent);
-                finish();
+                startActivity(new Intent(getApplicationContext(), Tab_Ranking_Overall_Friends.class));
             }
         });
 
@@ -60,9 +57,7 @@ public class Tab_Ranking extends Activity {
             public void onClick(View v) {
                 session.setLogin(true);
 
-                Intent intent = new Intent(Tab_Ranking.this, Tab_Ranking_Weekly_Global.class);
-                startActivity(intent);
-                finish();
+                startActivity(new Intent(getApplicationContext(), Tab_Ranking_Weekly_Global.class));
             }
         });
 
@@ -72,9 +67,7 @@ public class Tab_Ranking extends Activity {
             public void onClick(View v) {
                 session.setLogin(true);
 
-                Intent intent = new Intent(Tab_Ranking.this, Tab_Ranking_Weekly_Friends.class);
-                startActivity(intent);
-                finish();
+                startActivity(new Intent(getApplicationContext(), Tab_Ranking_Weekly_Friends.class));
             }
         });
     }

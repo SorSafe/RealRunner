@@ -48,7 +48,7 @@
         android:layout_height="50dp"
         android:text="Weekly Global"
         android:src="@drawable/weekly"
-        android:id="@+id/weekly"
+        android:id="@+id/weeklyFriends"
         android:layout_marginTop="120dp"
         android:layout_below="@+id/overallFriend"
         android:layout_centerInParent="true"
@@ -59,9 +59,9 @@
         android:layout_height="50dp"
         android:text="Weekly friends"
         android:src="@drawable/weekfriend"
-        android:id="@+id/weeklyFriend"
+        android:id="@+id/weekly"
         android:layout_marginTop="30dp"
-        android:layout_below="@+id/weekly"
+        android:layout_below="@+id/weeklyFriends"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal" />
 </RelativeLayout>

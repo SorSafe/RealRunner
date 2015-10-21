@@ -6,6 +6,7 @@ package com.example.acerth.app;
 public class AppConfig {
     public static String URL_LOGIN = "http://iearth.in.th/project/android_login_api/login.php";
     public static String URL_REGISTER = "http://iearth.in.th/project/android_login_api/register.php";
+    public static String URL_REGISTER_2 = "http://iearth.in.th/project/android_login_api/register2.php";
     public static String URL_SHOWUSER = "http://iearth.in.th/project/android_login_api/showAllUser.php";
     public static String URL_UPDATE_NAME = "http://iearth.in.th/project/android_login_api/update_name.php";
     public static String URL_SHOW_RANKING = "http://iearth.in.th/project/android_login_api/showAllRanking.php";
