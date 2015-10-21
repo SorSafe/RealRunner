@@ -111,9 +111,10 @@
             android:id="@+id/dis"
             android:layout_width="160px"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:text=""
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textAlignment="gravity" />
 
         <TextView
             android:id="@+id/Udis"
@@ -154,8 +155,8 @@
             android:layout_height="wrap_content"
             android:text=""
             android:layout_marginRight="13dp"
-            android:layout_gravity="center"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textAlignment="gravity" />
 
         <TextView
             android:id="@+id/Ucal"

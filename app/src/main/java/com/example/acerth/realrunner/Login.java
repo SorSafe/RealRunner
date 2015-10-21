@@ -47,7 +47,7 @@ public class Login extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 //        blindWidget();
-        setWidgetEventListener();
+//        setWidgetEventListener();
 
         inputUsername = (EditText) findViewById(R.id.usernameLog);
         inputPassword = (EditText) findViewById(R.id.passLog);
@@ -223,14 +223,14 @@ public class Login extends Activity {
             pDialog.dismiss();
     }
 
-    private void setWidgetEventListener() {
-        mImageViewForgot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),ForgotPassword.class));
-            }
-        });
-    }
+//    private void setWidgetEventListener() {
+//        mImageViewForgot.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getApplicationContext(),ForgotPassword.class));
+//            }
+//        });
+//    }
 
 
 //    private void blindWidget() {
