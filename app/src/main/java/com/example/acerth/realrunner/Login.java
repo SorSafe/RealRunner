@@ -7,13 +7,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
-import com.android.volley.NetworkResponse;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
 import com.android.volley.Request.Method;
@@ -47,7 +46,7 @@ public class Login extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        blindWidget();
+//        blindWidget();
         setWidgetEventListener();
 
         inputUsername = (EditText) findViewById(R.id.usernameLog);
@@ -234,9 +233,9 @@ public class Login extends Activity {
     }
 
 
-    private void blindWidget() {
-        mImageViewForgot = (ImageView)findViewById(R.id.forgot);
-    }
+//    private void blindWidget() {
+//        mImageViewForgot = (ImageView)findViewById(R.id.forgot);
+//    }
 
    /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
