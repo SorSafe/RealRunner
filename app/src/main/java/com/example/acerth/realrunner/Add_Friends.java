@@ -210,7 +210,7 @@ public class Add_Friends extends Activity {
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: You have added this friend Already !!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "You have added this friend Already !!!", Toast.LENGTH_LONG).show();
                 }
 
             }

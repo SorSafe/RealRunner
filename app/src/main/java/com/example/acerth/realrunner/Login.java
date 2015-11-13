@@ -145,7 +145,7 @@ public class Login extends Activity {
                         String msg = jObj.getString("msg");
                         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
                         // Launch main activity
-                        Intent intent = new Intent(Login.this, Welcome.class);
+                        Intent intent = new Intent(Login.this, MainMenuActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

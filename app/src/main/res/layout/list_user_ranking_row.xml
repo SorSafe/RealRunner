@@ -5,6 +5,18 @@
     android:background="@drawable/list_row_selector"
     android:padding="8dp" >
 
+    <TextView
+        android:id="@+id/numrow"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:textSize="@dimen/user_name"
+        android:textStyle="bold"
+        android:layout_alignBottom="@+id/thumbnail"
+        android:layout_toStartOf="@+id/user_name_rank"
+        android:textAlignment="center" />
+
     <!-- Thumbnail Image -->
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/thumbnail"
@@ -16,22 +28,33 @@
 
     <TextView
         android:id="@+id/user_name_rank"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/thumbnail"
-        android:layout_toRightOf="@+id/thumbnail"
         android:textSize="@dimen/user_name"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/user_score" />
 
     <TextView
         android:id="@+id/user_score"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/user_id"
+        android:textSize="25dp"
         android:textStyle="bold"
+        android:layout_alignBottom="@+id/numrow"
+        android:layout_toStartOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:text="km"
         android:layout_alignBottom="@+id/thumbnail"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="54dp" />
 
 
 </RelativeLayout>

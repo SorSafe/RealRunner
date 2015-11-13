@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
 
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-            Intent intent = new Intent(MainActivity.this, Welcome.class);
+            Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
             startActivity(intent);
             finish();
         }else{

@@ -7,8 +7,6 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-
-
     <LinearLayout
         android:id="@+id/profile"
         android:layout_marginTop="15dp"
@@ -16,6 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:orientation="vertical">
+
+
 
         <ImageView
             android:id="@+id/pic_profile"
@@ -183,9 +183,13 @@
             android:layout_width="85dp"
             android:layout_height="50dp"
             android:id="@+id/add_friend"
-            android:layout_gravity="center_horizontal"
             android:src="@drawable/add_friend" />
 
+        <ImageView
+            android:layout_width="85dp"
+            android:layout_height="70dp"
+            android:id="@+id/map"
+            android:src="@drawable/startmap" />
 
         <ImageView
             android:layout_width="85dp"
@@ -193,12 +197,17 @@
             android:id="@+id/calculate"
             android:src="@drawable/calculate" />
 
-        <ImageView
-            android:layout_width="85dp"
-            android:layout_height="50dp"
-            android:id="@+id/map"
-            android:src="@drawable/clickmap" />
+
     </LinearLayout>
 
-
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dip"
+        android:background="#ffdf6e"
+        android:text="@string/btn_logout"
+        android:textAllCaps="false"
+        android:textColor="#000000"
+        android:textSize="15dp" />
 </LinearLayout>

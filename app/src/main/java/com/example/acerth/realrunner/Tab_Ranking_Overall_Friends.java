@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -41,23 +42,13 @@ public class Tab_Ranking_Overall_Friends extends Activity{
     private SQLiteHandler db;
     private int user_id;
     private Button btnBack;
+    private int numrow;
+    private ViewGroup headerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_ranking_ovarall_friends);
-
-        //       LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
-//        linearLayout.setBackgroundColor(Color.parseColor("#3982d9"));
-        btnBack = (Button)findViewById(R.id.back2);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainMenuActivity.class));
-
-            }
-        });
 
         db = new SQLiteHandler(getApplicationContext());
 
@@ -65,6 +56,8 @@ public class Tab_Ranking_Overall_Friends extends Activity{
         user_id = Integer.parseInt(user.get("user_id"));
 
         listView = (ListView) findViewById(R.id.listUserRankFriend);
+        headerView = (ViewGroup)getLayoutInflater().inflate(R.layout.header, listView, false);
+        listView.addHeaderView(headerView);
         adapter = new CustomListUserAdapterRanking(this, userList);
         listView.setAdapter(adapter);
 
@@ -84,9 +77,10 @@ public class Tab_Ranking_Overall_Friends extends Activity{
                         // Parsing json
                         for (int i = 0; i < response.length(); i++) {
                             try {
-
+                                numrow = i+1;
                                 obj = response.getJSONObject(i);
                                 userRank = new UserRanking();
+                                userRank.setNum_row(numrow);
                                 userRank.setUser_image_name(obj.getString("user_image_name"));
                                 userRank.setUser_game_name(obj.getString("user_game_name"));
                                 userRank.setSumDistance(obj.getDouble("SUM_DISTANCE"));
@@ -139,6 +133,15 @@ public class Tab_Ranking_Overall_Friends extends Activity{
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    public void goBack(View v){
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
 

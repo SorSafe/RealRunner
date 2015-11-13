@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -36,26 +37,17 @@ public class Tab_Ranking_Overall_Global extends Activity{
     //private SearchView searchView;
     private UserRanking userRank;
     private JSONObject obj;
-    private Button btnBack;
+    private int numrow;
+    private ViewGroup headerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_ranking_ovarall_global);
 
-        //       LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear);
-//        linearLayout.setBackgroundColor(Color.parseColor("#3982d9"));
-        btnBack = (Button)findViewById(R.id.back1);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainMenuActivity.class));
-
-            }
-        });
-
         listView = (ListView) findViewById(R.id.listUserRank);
+        headerView = (ViewGroup)getLayoutInflater().inflate(R.layout.header, listView, false);
+        listView.addHeaderView(headerView);
         adapter = new CustomListUserAdapterRanking(this, userList);
         listView.setAdapter(adapter);
 
@@ -75,15 +67,20 @@ public class Tab_Ranking_Overall_Global extends Activity{
                         // Parsing json
                         for (int i = 0; i < response.length(); i++) {
                             try {
-
+                                numrow = i+1;
                                 obj = response.getJSONObject(i);
                                 userRank = new UserRanking();
+                                userRank.setNum_row(numrow);
                                 userRank.setUser_image_name(obj.getString("user_image_name"));
                                 userRank.setUser_game_name(obj.getString("user_game_name"));
                                 userRank.setSumDistance(obj.getDouble("SUM_DISTANCE"));
 
+                                double sumDis = userRank.getSumDistance();
                                 // adding movie to movies array
                                 userList.add(userRank);
+                                if(sumDis==0.0){
+                                    numrow = i;
+                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -130,6 +127,15 @@ public class Tab_Ranking_Overall_Global extends Activity{
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    public void goBack(View v){
+        onBackPressed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
 

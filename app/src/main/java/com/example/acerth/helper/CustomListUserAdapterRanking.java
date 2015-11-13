@@ -54,12 +54,14 @@ public class CustomListUserAdapterRanking extends BaseAdapter {
             imageLoader = AppController.getInstance().getImageLoader();
 
         NetworkImageView thumbNail = (NetworkImageView) convertView.findViewById(R.id.thumbnail);
+        TextView numRow = (TextView)convertView.findViewById(R.id.numrow);
         TextView userName = (TextView)convertView.findViewById(R.id.user_name_rank);
         TextView sumDistance = (TextView)convertView.findViewById(R.id.user_score);
 
         UserRanking u = userRankingItems.get(position);
 
         thumbNail.setImageUrl(String.valueOf(u.getUser_image_name()), imageLoader);
+        numRow.setText(String.valueOf(u.getNum_row()));
         userName.setText(String.valueOf(u.getUser_game_name()));
         sumDistance.setText(String.valueOf(u.getSumDistance()));
 

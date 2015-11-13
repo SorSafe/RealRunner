@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.acerth.app.AppConfig;
 import com.example.acerth.app.AppController;
 import com.example.acerth.helper.SQLiteHandler;
+import com.example.acerth.helper.SessionManager;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -49,6 +51,7 @@ public class Tab_Profile extends AppCompatActivity {
     private ImageView mImageViewAddFriend;
     private ImageView mImageViewCalculate;
     private ImageView mImageViewMemoryBook;
+    private ImageView mImageViewStart;
     private ImageView mImageViewProfile;
     private ImageView mImageViewEditName;
     private ImageView mImageViewMap;
@@ -65,6 +68,8 @@ public class Tab_Profile extends AppCompatActivity {
     private String user_image_name;
     private String caloriesStr;
     private String distanceStr;
+    private SessionManager session;
+    private Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,20 @@ public class Tab_Profile extends AppCompatActivity {
         nameField = (TextView) findViewById(R.id.name);
         caloriesField = (TextView) findViewById(R.id.cal);
         distanceField = (TextView) findViewById(R.id.dis);
+        btnLogout = (Button) findViewById(R.id.btnLogout);
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutUser();
+            }
+        });
+
+        session = new SessionManager(getApplicationContext());
+
+        if (!session.isLoggedIn()) {
+            logoutUser();
+        }
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -116,13 +135,6 @@ public class Tab_Profile extends AppCompatActivity {
         mImageViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                AlertDialog.Builder builder =
-//                        new AlertDialog.Builder(Tab_Profile.this);
-//                builder.setMessage("Do you want to change profile picture ?");
-//                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int id) {
-//                        Toast.makeText(getApplicationContext(),
-//                                "hello", Toast.LENGTH_SHORT).show();
 
                 ImageView pick = (ImageView) findViewById(R.id.pic_profile);
                 pick.setOnClickListener(new View.OnClickListener() {
@@ -134,13 +146,7 @@ public class Tab_Profile extends AppCompatActivity {
                         getParent().startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_IMAGE);
                     }
                 });
-//                builder.setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//                builder.show();
+
             }
         });
         mImageViewEditName.setOnClickListener(new View.OnClickListener() {
@@ -363,26 +369,6 @@ public class Tab_Profile extends AppCompatActivity {
 }
 
 
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == SELECT_IMAGE) {
-//            if (resultCode == this.RESULT_OK) {
-//                if (data != null) {
-//                    try {
-//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-//                        mImageViewProfile.setImageBitmap(bitmap);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                } else if (resultCode == this.RESULT_CANCELED) {
-//                    Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }
-//    }
-
 
     private void bindWidget() {
         mImageViewAddFriend = (ImageView) findViewById(R.id.add_friend);
@@ -392,4 +378,14 @@ public class Tab_Profile extends AppCompatActivity {
         mImageViewMap = (ImageView) findViewById(R.id.map);
     }
 
+    private void logoutUser() {
+        session.setLogin(false);
+
+        db.deleteUsers();
+
+        // Launching the login activity
+        Intent intent = new Intent(Tab_Profile.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
