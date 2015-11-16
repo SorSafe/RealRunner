@@ -35,6 +35,7 @@ public class Calculate extends Activity {
     private String genderChosen;
     private ImageView mQuestion;
     private TextView bStandard;
+    private TextView bFormular;
 
     EditText wieghtValue;
     EditText hieghtValue;
@@ -157,7 +158,7 @@ public class Calculate extends Activity {
                 AlertDialog.Builder builder =
                         new AlertDialog.Builder(Calculate.this);
                 builder.setMessage("BMI คือ ค่าที่บ่งบอกภาวะอ้วนและผอมในผู้ใหญ่\n" +
-                        "\nStatus คือ สถานะบ่งบอกความอ้วนและผอมในผู้ใหญ่\n"+
+                        "\nStatus คือ สถานะบ่งบอกความอ้วนและผอมในผู้ใหญ่\n" +
                         "\nBMR คือ อัตราการความต้องการเผาผลาญพื้นฐานในชีวิตประจำวัน\n" +
                         "\nTDEE คือ พลังงานที่ใช้ทั้งหมดในชีวิตประจำวัน\n");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -193,7 +194,42 @@ public class Calculate extends Activity {
                 builder.show();
             }
         });
+
+        bFormular = (TextView) findViewById(R.id.fromular);
+        bFormular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(Calculate.this);
+                builder.setMessage("*สูตรการคำนวณ BMI*" +
+                        "\n BMI = น่ำหนัก / ส่วนสูงยกกำลังสอง\n"+
+                        "\n*สูตรการคำนวณ BMR*" +
+                        "\n\n-สำหรับผู้ชาย \nBMR = 66 + (13.7*น้ำหนัก) + (5*ส่วนสูง) - (6.8*อายุ)"+
+                        "\n\n-สำหรับผู้หญิง \n" +
+                        "BMR = 665 + (9.6*น้ำหนัก) + (1.8*ส่วนสูง) - (4.7*อายุ)" +
+                        "\n\n*สูตรการคำนวณ TDEE*\n"+
+                        "\n-ไม่ได้ออกกำลังกาย" +
+                        "\nBMR * 1.2\n"+
+                        "\n-ออกกำลังกาย 1-3 วัน/สัปดาห์" +
+                        "\nBMR * 1.375\n"+
+                        "\n-ออกกำลังกาย 4-5 วัน/สัปดาห์" +
+                        "\nBMR * 1.55\n"+
+                        "\n-ออกกำลังกาย 6-7 วัน/สัปดาห์" +
+                        "\nBMR * 1.725\n"+
+                        "\n-ออกกำลังกายทุกวัน" +
+                        "\nBMR * 1.9\n");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+        });
+
     }
+
+
 
     public void createdaysExerciseData(){
         daysExerciseData.add("No Exercise");
