@@ -70,6 +70,7 @@ public class Tab_Profile extends AppCompatActivity {
     private String distanceStr;
     private SessionManager session;
     private Button btnLogout;
+    private TextView dateField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,7 @@ public class Tab_Profile extends AppCompatActivity {
         nameField = (TextView) findViewById(R.id.name);
         caloriesField = (TextView) findViewById(R.id.cal);
         distanceField = (TextView) findViewById(R.id.dis);
+        dateField = (TextView) findViewById(R.id.date);
         btnLogout = (Button) findViewById(R.id.btnLogout);
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +111,7 @@ public class Tab_Profile extends AppCompatActivity {
         user_image_name = user.get("user_image_name");
 
         showSumCaloriesAndDistance(user_id);
+        showTimeStart(user_id);
 
         // Displaying the user details on the screen
         idField.setText(user_id);
@@ -368,6 +371,85 @@ public class Tab_Profile extends AppCompatActivity {
     AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
 }
 
+    public void showTimeStart(String user_id){
+        String tag_string_req = "req_showTimestart";
+
+        StringRequest strReq = new StringRequest(Request.Method.GET,
+                AppConfig.URL_SHOW_TIMESTART+"?user_id="+user_id, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Login Response: " + response.toString());
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+
+                    if (!error) {
+
+                        JSONObject userplaymap = jObj.getJSONObject("userplaymap");
+
+                        String time = userplaymap.getString("time_start");
+
+                        dateField.setText(time);
+
+
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: You have added this friend Already !!!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (error instanceof NoConnectionError) {
+                    Toast.makeText(getApplicationContext(), "NoConnectionError.......", Toast.LENGTH_LONG).show();
+
+                } else if (error instanceof AuthFailureError) {
+                    Toast.makeText(getApplicationContext(), "AuthFailureError.......", Toast.LENGTH_LONG).show();
+
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(getApplicationContext(), "ServerError.......", Toast.LENGTH_LONG).show();
+
+                } else if (error instanceof NetworkError) {
+                    Toast.makeText(getApplicationContext(), "NetworkError.......", Toast.LENGTH_LONG).show();
+
+                } else if (error instanceof ParseError) {
+                    Toast.makeText(getApplicationContext(), "ParseError.......", Toast.LENGTH_LONG).show();
+
+                }else if (error instanceof TimeoutError) {
+                    Toast.makeText(getApplicationContext(), "TimeoutError.......", Toast.LENGTH_LONG).show();
+                }
+                //Log.e(TAG, "Login Error: " + error.getMessage());
+                //Toast.makeText(getApplicationContext(),
+                //        error.getMessage(), Toast.LENGTH_LONG).show();
+                //hideDialog();
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+                // params.put("friend_id", friend_id);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
 
 
     private void bindWidget() {

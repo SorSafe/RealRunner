@@ -19,4 +19,5 @@ public class AppConfig {
     public static String URL_UPLOAD_IMAGE = "http://iearth.in.th/project/PageUploadToMySQL2.php";
     public static String URL_SHOW_HISTORY = "http://iearth.in.th/project/android_login_api/getHistoryOfUser.php";
     public static String URL_SHOW_SUM_CALORIES_AND_DISTANCE = "http://iearth.in.th/project/android_login_api/getSumCaloriesAndDistance.php";
+    public static String URL_SHOW_TIMESTART = "http://iearth.in.th/project/android_login_api/showtimestart.php";
 }

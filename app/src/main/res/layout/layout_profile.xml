@@ -93,8 +93,8 @@
         android:orientation="horizontal"
         android:layout_below="@+id/area_id"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_width="230dp"
+        android:layout_marginLeft="7dp"
+        android:layout_width="260dp"
         android:layout_height="wrap_content">
 
         <TextView
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"
             android:textSize="20sp"
-            android:text="Distance"
+            android:text="Cumm Dist."
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -131,7 +131,7 @@
 
     <LinearLayout
         android:id="@+id/descript2"
-        android:layout_width="232dp"
+        android:layout_width="265dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/description"
         android:layout_centerHorizontal="true"
@@ -144,7 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="21dp"
             android:textSize="20sp"
-            android:text="Calories"
+            android:text="Cumm. Cal."
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -170,10 +170,40 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/dateArea"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/tDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:textSize="20sp"
+            android:text="Start Date"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/date"
+            android:textSize="20sp"
+            android:layout_width="160px"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center"
+            android:textAlignment="gravity" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/descript2"
         android:layout_gravity="center_horizontal"
         android:gravity="center">
@@ -204,7 +234,7 @@
         android:id="@+id/btnLogout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dip"
+        android:layout_marginTop="30dp"
         android:background="#ffdf6e"
         android:text="@string/btn_logout"
         android:textAllCaps="false"

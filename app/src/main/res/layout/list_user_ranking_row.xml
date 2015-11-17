@@ -7,15 +7,17 @@
 
     <TextView
         android:id="@+id/numrow"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
+        android:text=""
         android:textSize="@dimen/user_name"
         android:textStyle="bold"
         android:layout_alignBottom="@+id/thumbnail"
         android:layout_toStartOf="@+id/user_name_rank"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:gravity="center_vertical|center_horizontal" />
 
     <!-- Thumbnail Image -->
     <com.android.volley.toolbox.NetworkImageView
@@ -55,6 +57,30 @@
         android:layout_alignBottom="@+id/thumbnail"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="54dp" />
+
+    <!--TextView
+        android:id="@+id/sta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="Start@"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/thumbnail"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/date"
+        android:hint="date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/user_score"
+        android:layout_toRightOf="@+id/sta"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentTop="false" /-->
 
 
 </RelativeLayout>
