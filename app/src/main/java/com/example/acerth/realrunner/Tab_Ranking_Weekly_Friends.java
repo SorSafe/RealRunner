@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.acerth.app.AppConfig;
 import com.example.acerth.app.AppController;
 import com.example.acerth.helper.CustomListUserAdapterRanking;
+import com.example.acerth.helper.CustomListUserAdapterRankingWeekly;
 import com.example.acerth.helper.SQLiteHandler;
 import com.example.acerth.helper.UserRanking;
 
@@ -35,7 +36,7 @@ public class Tab_Ranking_Weekly_Friends extends Activity{
     private ProgressDialog pDialog;
     private List<UserRanking> userList = new ArrayList<UserRanking>();
     private ListView listView;
-    private CustomListUserAdapterRanking adapter;
+    private CustomListUserAdapterRankingWeekly adapter;
     //private SearchView searchView;
     private UserRanking userRank;
     private JSONObject obj;
@@ -58,7 +59,7 @@ public class Tab_Ranking_Weekly_Friends extends Activity{
         listView = (ListView) findViewById(R.id.listUserRankFriendWeekly);
         headerView = (ViewGroup)getLayoutInflater().inflate(R.layout.header, listView, false);
         listView.addHeaderView(headerView);
-        adapter = new CustomListUserAdapterRanking(this, userList);
+        adapter = new CustomListUserAdapterRankingWeekly(this, userList);
         listView.setAdapter(adapter);
 
         pDialog = new ProgressDialog(this);

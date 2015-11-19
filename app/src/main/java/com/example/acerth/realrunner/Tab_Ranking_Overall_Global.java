@@ -74,6 +74,7 @@ public class Tab_Ranking_Overall_Global extends Activity{
                                 userRank.setUser_image_name(obj.getString("user_image_name"));
                                 userRank.setUser_game_name(obj.getString("user_game_name"));
                                 userRank.setSumDistance(obj.getDouble("SUM_DISTANCE"));
+                                userRank.setTimeStart(obj.getString("DATE"));
 
                                 double sumDis = userRank.getSumDistance();
                                 // adding movie to movies array

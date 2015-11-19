@@ -10,6 +10,7 @@ public class UserRanking {
     private String user_game_name;
     private String user_image_name;
     private double sumDistance;
+    private String timeStart;
 
     public UserRanking() {
     }
@@ -64,5 +65,13 @@ public class UserRanking {
 
     public void setUser_image_name(String user_image_name) {
         this.user_image_name = user_image_name;
+    }
+
+    public String getTimeStart() {
+        return timeStart;
+    }
+
+    public void setTimeStart(String timeStart) {
+        this.timeStart = timeStart;
     }
 }

@@ -86,7 +86,7 @@ public class Tab_Profile extends AppCompatActivity {
         nameField = (TextView) findViewById(R.id.name);
         caloriesField = (TextView) findViewById(R.id.cal);
         distanceField = (TextView) findViewById(R.id.dis);
-        dateField = (TextView) findViewById(R.id.date);
+         dateField = (TextView) findViewById(R.id.date);
         btnLogout = (Button) findViewById(R.id.btnLogout);
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -391,14 +391,22 @@ public class Tab_Profile extends AppCompatActivity {
 
                         String time = userplaymap.getString("time_start");
 
-                        dateField.setText(time);
+                         dateField.setText(time);
 
 
                     } else {
                         // Error in login. Get the error message
-                        String errorMsg = jObj.getString("msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
+                       // String errorMsg = jObj.getString("msg");
+                        //Toast.makeText(getApplicationContext(),
+                          //      errorMsg, Toast.LENGTH_LONG).show();
+
+                        JSONObject userplaymap = jObj.getJSONObject("userplaymap");
+
+                        String time = userplaymap.getString("time_start");
+
+                        caloriesField.setText("0.0");
+                        distanceField.setText("0.0");
+                        dateField.setText("");
                     }
                 } catch (JSONException e) {
                     // JSON error
